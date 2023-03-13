@@ -13,7 +13,7 @@ export default function Sidebar() {
                 <div className="space-y-3">
                     <div className="flex items-center justify-between">
                         <h2 className="text-xl font-bold text-white">
-                            Dashboard
+                            Testing
                         </h2>
                         <button onClick={() => setOpen(!open)}>
                             <svg
