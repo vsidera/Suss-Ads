@@ -5,11 +5,13 @@ import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
+import Sidebar from "../../components/sidebar/sidebar";
 
 const Home = () => {
   return (
+    <Sidebar>
     <div className="home">
-      <Sidebar />
+      
       <div className="homeContainer">
         <Navbar />
         <div className="widgets">
@@ -28,6 +30,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    </Sidebar>
   );
 };
 
