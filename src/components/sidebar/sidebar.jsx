@@ -5,7 +5,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../../pages/login/Login";
 
-export default function Sidebar() {
+export default function Sidebar({children}) {
     const [open, setOpen] = useState(false);
     return (
         <div className="flex">
@@ -65,8 +65,7 @@ export default function Sidebar() {
                             className="w-full py-2 pl-10 text-sm rounded-md focus:outline-none"
                         />
                     </div>
-                    {/* <BrowserRouter>
-                    <Routes> */}
+
                     <div className="flex-1">
                         <ul className="pt-2 pb-4 space-y-1 text-sm">
                             <li className="rounded-sm">
@@ -196,37 +195,11 @@ export default function Sidebar() {
                             </li>
                         </ul>
                     </div>
-                    {/* </Routes>
-                    </BrowserRouter> */}
+    
                 </div>
             </div>
             <div className="container mx-auto mt-12">
-                <div className="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
-                    <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-                        <div className="text-sm font-medium text-gray-500 truncate">
-                            Nexus
-                        </div>
-                        <div className="mt-1 text-3xl font-semibold text-gray-900">
-                            12,000
-                        </div>
-                    </div>
-                    <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-                        <div className="text-sm font-medium text-gray-500 truncate">
-                            Nexus
-                        </div>
-                        <div className="mt-1 text-3xl font-semibold text-gray-900">
-                            $ 450k
-                        </div>
-                    </div>
-                    <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-                        <div className="text-sm font-medium text-gray-500 truncate">
-                            Nexus
-                        </div>
-                        <div className="mt-1 text-3xl font-semibold text-gray-900">
-                            20k
-                        </div>
-                    </div>
-                </div>
+                {children}
             </div>
         </div>
     );

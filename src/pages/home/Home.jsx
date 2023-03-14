@@ -1,35 +1,35 @@
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
-import "./home.scss";
-import Widget from "../../components/widget/Widget";
-import Featured from "../../components/featured/Featured";
-import Chart from "../../components/chart/Chart";
-import Table from "../../components/table/Table";
 import Sidebar from "../../components/sidebar/sidebar";
+// import "./home.scss";
 
 const Home = () => {
   return (
     <Sidebar>
-    <div className="home">
-      
-      <div className="homeContainer">
-        <Navbar />
-        <div className="widgets">
-          <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
-        </div>
-        <div className="charts">
-          <Featured />
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
-        </div>
-        <div className="listContainer">
-          <div className="listTitle">Latest Transactions</div>
-          <Table />
-        </div>
-      </div>
-    </div>
+    <div className="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
+                    <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
+                        <div className="text-sm font-medium text-gray-500 truncate">
+                            Nexus
+                        </div>
+                        <div className="mt-1 text-3xl font-semibold text-gray-900">
+                            12,000
+                        </div>
+                    </div>
+                    <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
+                        <div className="text-sm font-medium text-gray-500 truncate">
+                            Nexus
+                        </div>
+                        <div className="mt-1 text-3xl font-semibold text-gray-900">
+                            $ 450k
+                        </div>
+                    </div>
+                    <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
+                        <div className="text-sm font-medium text-gray-500 truncate">
+                            Nexus
+                        </div>
+                        <div className="mt-1 text-3xl font-semibold text-gray-900">
+                            20k
+                        </div>
+                    </div>
+                </div>
     </Sidebar>
   );
 };
