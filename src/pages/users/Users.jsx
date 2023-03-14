@@ -1,4 +1,3 @@
-// import "./login.scss"
 
 const Users = () => {
     return (
