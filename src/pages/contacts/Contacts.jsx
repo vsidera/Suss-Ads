@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Sidebar from "../../components/sidebar/sidebar"
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Table from "../../components/table/table"
@@ -100,9 +101,10 @@ const getMuiTheme = () =>
 const Contacts = () => {
 
   const [contacts, setContacts] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false)
 
-  const getContacts = (e) => {
-    e.preventDefault();
+  const getContacts = () => {
+
     console.log("THIS GETS HERE!!!!!!!!")
 
     contactsAction()
@@ -111,6 +113,7 @@ const Contacts = () => {
           console.log("AN ERROR HAS OCCURED")
         } else {
           setContacts(res.data)
+          setIsLoaded(true)
         }
       })
       .catch((err) => {
@@ -122,6 +125,41 @@ const Contacts = () => {
 
     getContacts();
   }, []);
+
+  const columns = [
+    {
+     name: "id",
+     label: "Name",
+     options: {
+      filter: true,
+      sort: true,
+     }
+    },
+    {
+     name: "source",
+     label: "Company",
+     options: {
+      filter: true,
+      sort: false,
+     }
+    },
+    {
+     name: "direction",
+     label: "City",
+     options: {
+      filter: true,
+      sort: false,
+     }
+    },
+    {
+     name: "status_desc",
+     label: "State",
+     options: {
+      filter: true,
+      sort: false,
+     }
+    },
+   ];
 
   const options = {
     filter: false,
@@ -138,27 +176,8 @@ const Contacts = () => {
     fixedSelectColumn: true,
     tableBodyHeight: 'auto',
     enableNestedDataAccess: '.',
-    count: customerCount,
     elevation: 0,
-    page: page,
-    serverSide: true,
     rowsPerPageOptions: [10, 20, 50],
-    onTableChange: (action, tableState) => {
-      console.log("ACTION IS !!!!", action);
-      if (action === "changePage") {
-
-        setIsLoaded(false);
-        setPage(tableState.page);
-
-      } else if (action === "changeRowsPerPage") {
-        console.log("action not handled.", tableState);
-        setIsLoaded(false);
-        setLimit(tableState.rowsPerPage);
-      }
-      else {
-        console.log("action not handled.");
-      }
-    },
     downloadOptions: {
       separator: ',',
       filename: 'Customers Summary.csv',
@@ -175,38 +194,14 @@ const Contacts = () => {
 
     searchOpen: true,
     searchText: " ",
-    customSearchRender: (searchText, handleSearch, hideSearch, options) => {
-      return (
-        // @ts-ignore
-        <SearchComponent
-          setSearch={setSearch}
-          getData={getClientsSearch}
-          setKey={setKey}
-        />
-      );
-    },
    
-    customToolbarSelect: (selectedRows, data) =>
-      <SelectedRowsToolbar
-        selectedRows={selectedRows}
-        data={data}
-        columns={columns}
-        datatableTitle="Selected Customers"
-      />,
     textLabels: {
       body: {
         noMatch: isLoaded ? "Sorry, no matching records exist in ecoa Nexus"
           : <div >
-            <Backdrop
-              sx={{ position: 'relative', height: 450, backgroundColor: '#E8E9EC', }}
-              open={true} >
-              <FadeLoader
-                style={{ marginLeft: 45, position: "relative", top: 3 }}
-              />
-            </Backdrop>
+            ......
           </div>,
         toolTip: "Sort",
-        columnHeaderTooltip: (column) => column`Sort for ${column.label}`
       },
       pagination: {
         next: "Next Page",
