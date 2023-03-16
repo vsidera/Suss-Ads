@@ -6,6 +6,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Admin from "./pages/admin/admin";
 import Contacts from "./pages/contacts/Contacts";
+import Messages from "./pages/messages/Messages";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='users' element={<Users/>} />
           <Route path='admin' element={<Admin/>} />
           <Route path='contacts' element={<Contacts/>} />
+          <Route path='messages' element={<Messages/>} />
         </Routes>
     
       </BrowserRouter>

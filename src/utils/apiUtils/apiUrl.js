@@ -9,7 +9,7 @@ export default {
     BULK_SEND_DLRS: `${REACT_APP_NEXUS_URL}/public/bulksms/:msg_id/dlrs`,
     SIMULATE_CALLBACK: `${REACT_APP_NEXUS_URL}/public/bulksms/:msg_id/dlr`,
     UPLOAD_CONTACTS: `${REACT_APP_NEXUS_URL}/api/v1/contact/:app_id/upload`,
-    LIST_MESSAGES: `${REACT_APP_NEXUS_URL}/api/v1/message/:app_id/list`,
+    LIST_MESSAGES: `${REACT_APP_NEXUS_URL}/api/v1/message/3/list`,
     APP_SERVICES: `${REACT_APP_NEXUS_URL}/api/v1/application/:app_id/service/list`,
     ATTACH_USER_APP: `${REACT_APP_NEXUS_URL}/api/v1/application/:app_id/user/attach`,
     ATTACH_SERVICE_APP: `${REACT_APP_NEXUS_URL}/api/v1/application/:app_id/service/:service_id`,
