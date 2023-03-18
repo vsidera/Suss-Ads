@@ -17,7 +17,7 @@ export default function Sidebar({children}) {
                 <div className="space-y-3">
                     <div className="flex items-center justify-between">
                         <h2 className="text-xl font-bold text-white">
-                            User Management
+                            Suss Advertising
                         </h2>
                         <button onClick={() => setOpen(!open)}>
                             <svg
@@ -70,7 +70,7 @@ export default function Sidebar({children}) {
                         <ul className="pt-2 pb-4 space-y-1 text-sm">
                             <li className="rounded-sm">
                                 <a
-                                    href="/users"
+                                    href="/contacts"
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -89,13 +89,13 @@ export default function Sidebar({children}) {
                                     </svg>
                     
                          
-                                    <span className="text-gray-100">Nexus 1</span>
+                                    <span className="text-gray-100">Contacts</span>
                  
                                 </a>
                             </li>
                             <li className="rounded-sm">
                                 <a
-                                    href="/services"
+                                    href="/messages"
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -113,7 +113,7 @@ export default function Sidebar({children}) {
                                         />
                                     </svg>
                        
-                                    <span className="text-gray-100">Nexus 2</span>
+                                    <span className="text-gray-100">Messages</span>
                                 </a>
                             </li>
                             <li className="rounded-sm">
@@ -136,13 +136,13 @@ export default function Sidebar({children}) {
                                         />
                                     </svg>
                                     <span className="text-gray-100">
-                                        Nexus 3
+                                        App Services
                                     </span>
                                 </a>
                             </li>
                             <li className="rounded-sm">
                                 <a
-                                    href="messages"
+                                    href="#"
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -165,13 +165,13 @@ export default function Sidebar({children}) {
                                         />
                                     </svg>
                                     <span className="text-gray-100">
-                                        Nexus 4
+                                        Suss
                                     </span>
                                 </a>
                             </li>
                             <li className="rounded-sm">
                                 <a
-                                    href="contacts"
+                                    href="#"
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -189,7 +189,7 @@ export default function Sidebar({children}) {
                                         />
                                     </svg>
                                     <span className="text-gray-100">
-                                        Nexus 5
+                                        Logout
                                     </span>
                                 </a>
                             </li>
