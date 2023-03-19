@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Input, Button } from "@material-ui/core";
 
-const FileUpload=()=> {
+const FileUpload=({closeUpload})=> {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [upload, setUpload] = useState(false);
 
   const handleFileUpload = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -18,6 +17,9 @@ const FileUpload=()=> {
   return (
     <div className="flex justify-center items-center mt-2">
   <form onSubmit={handleFormSubmit} className="bg-gray-100 p-6 rounded-lg shadow-xl w-full mx-auto">
+    <div className="cursor-pointer" onClick={closeUpload}>
+        X
+    </div>
     <div className="mb-4 font-bold text-lg text-center">
       Pick a CSV file:
     </div>

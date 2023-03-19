@@ -3,9 +3,11 @@ import Sidebar from "../../components/sidebar/sidebar"
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Table from "../../components/table/table"
 import { messagesAction } from "../../actions/messages/messagesAction";
-import AddIcon from "@mui/icons-material/Add";
 import SendIcon from '@mui/icons-material/Send';
 import SendToMobileIcon from '@mui/icons-material/SendToMobile';
+import SendSmsModal from "../../components/modals/send_sms";
+import BroadcastModal from "../../components/modals/broadcast";
+import ScheduleSendIcon from '@mui/icons-material/ScheduleSend';
 
 const getMuiTheme = () =>
     createTheme({
@@ -105,6 +107,8 @@ const Messages = () => {
 
   const [messages, setMessages] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false)
+  const [smsModal, setSmsModal] = useState(false)
+  const [broadcastModal, setBroadcastModal] = useState(false)
 
   const getMessages = () => {
 
@@ -123,6 +127,16 @@ const Messages = () => {
         console.log(err)
       });
   };
+
+  const closeSendModal = (e) => {
+    e.preventDefault();
+    setSmsModal(false)
+  }
+
+  const closeBroadcastModal = (e) => {
+    e.preventDefault();
+    setBroadcastModal(false)
+  }
 
   useEffect(() => {
 
@@ -180,6 +194,7 @@ const Messages = () => {
     tableBodyHeight: 'auto',
     enableNestedDataAccess: '.',
     elevation: 0,
+    count: 30,
     rowsPerPageOptions: [10, 20, 50],
     downloadOptions: {
       separator: ',',
@@ -200,7 +215,7 @@ const Messages = () => {
    
     textLabels: {
       body: {
-        noMatch: isLoaded ? "Sorry, no matching records exist in ecoa Nexus"
+        noMatch: isLoaded ? "Sorry, no matching records exist in Suss"
           : <div >
             ......
           </div>,
@@ -247,20 +262,31 @@ const Messages = () => {
         <button
           type="button"
           className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
-          // onClick={() =>handleUser}
+          onClick={() =>setSmsModal(true)}
         >
           <SendToMobileIcon />
           <p className="ml-4">Send</p>
         </button>
         <button
           type="button"
-          className="text-white w-42 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center"
-          // onClick={() =>handleUser}
+          className="text-white w-42 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+          onClick={() =>setBroadcastModal(true)}
         >
           <SendIcon />
           <p className="ml-4">Broadcast</p>
         </button>
+        <button
+          type="button"
+          className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+          // onClick={() =>setSmsModal(true)}
+        >
+          <ScheduleSendIcon />
+          <p className="ml-4">Schedule</p>
+        </button>
       </div>
+      <SendSmsModal smsModal={smsModal} closeSendModal={closeSendModal}/>
+      <BroadcastModal broadcastModal={broadcastModal} closeBroadcastModal={closeBroadcastModal}/>
+
 
       <div className="mt-4">
         <ThemeProvider theme={getMuiTheme()}>

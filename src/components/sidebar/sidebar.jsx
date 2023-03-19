@@ -118,7 +118,7 @@ export default function Sidebar({children}) {
                             </li>
                             <li className="rounded-sm">
                                 <a
-                                    href="/admin"
+                                    href="/appservices"
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg

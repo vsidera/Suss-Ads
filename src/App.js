@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Admin from "./pages/admin/admin";
 import Contacts from "./pages/contacts/Contacts";
 import Messages from "./pages/messages/Messages";
+import AppServices from "./pages/app_services/app_services";
+import Applications from "./pages/applications/Applications";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path='admin' element={<Admin/>} />
           <Route path='contacts' element={<Contacts/>} />
           <Route path='messages' element={<Messages/>} />
+          <Route path='appservices' element={<AppServices/>} />
+          <Route path='apps' element={<Applications/>} />
         </Routes>
     
       </BrowserRouter>
