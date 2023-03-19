@@ -9,6 +9,8 @@ import Contacts from "./pages/contacts/Contacts";
 import Messages from "./pages/messages/Messages";
 import AppServices from "./pages/app_services/app_services";
 import Applications from "./pages/applications/Applications";
+import AllApps from "./pages/applications/AllApps";
+import AllServices from "./pages/services/services";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path='apps/:id/messages' element={<Messages/>} />
           <Route path='apps/:id/appservices' element={<AppServices/>} />
           <Route path='apps' element={<Applications/>} />
+          <Route path='all-apps' element={<AllApps/>} />
+          <Route path='all-services' element={<AllServices/>} />
         </Routes>
     
       </BrowserRouter>

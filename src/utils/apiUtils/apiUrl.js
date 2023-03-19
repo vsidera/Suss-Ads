@@ -17,4 +17,5 @@ export default {
     CREATE_APP: `${REACT_APP_SUSS_URL}/api/v1/application/create`,
     SEND_SMS: `${REACT_APP_SUSS_URL}/api/v1/message/:sid/user/send`,
     LIST_APPLICATIONS: `${REACT_APP_SUSS_URL}/api/v1/application/3/list`,
+    LIST_SERVICES: `${REACT_APP_SUSS_URL}/api/v1/service/3/list`,
 };

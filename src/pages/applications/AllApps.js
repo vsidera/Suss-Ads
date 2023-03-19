@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./styles.css";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Table from "../../components/table/table"
+import { appsAction } from "../../actions/applications/appsActions";
+import AppsCard from "../../components/appsCard/appsCard";
 import AdminSidebar from "../../components/adminSidebar/adminSidebar";
-import RegisterUserModal from "../../components/modals/register_user";
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 
 const getMuiTheme = () =>
   createTheme({
@@ -99,54 +100,28 @@ const getMuiTheme = () =>
     },
   });
 
-const Users = () => {
-  // const [users, setUsers] = useState([]);
+const AllApps = () => {
+  const [apps, setApps] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [registerModal, setRegisterModal] = useState(false);
 
-  const closeRegisterModal = (e) => {
-    e.preventDefault();
-    setRegisterModal(false)
-  }
+  const getApps = () => {
+    appsAction()
+      .then((res) => {
+        if (res.errors) {
+          console.log("AN ERROR HAS OCCURED");
+        } else {
+          setApps(res.data);
+          setIsLoaded(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  const users = [
-    {
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "id": 1,
-      "phone": "+1-555-555-5555",
-      "company": "Example Inc."
-    },
-    {
-      "name": "Jane Smith",
-      "email": "jane.smith@example.com",
-      "id": 2,
-      "phone": "+1-555-555-5556",
-      "company": "Example Corp."
-    },
-    {
-      "name": "Bob Johnson",
-      "email": "bob.johnson@example.com",
-      "id": 3,
-      "phone": "+1-555-555-5557",
-      "company": "Example Ltd."
-    },
-    {
-      "name": "Samantha Lee",
-      "email": "samantha.lee@example.com",
-      "id": 4,
-      "phone": "+1-555-555-5558",
-      "company": "Example Co."
-    },
-    {
-      "name": "Michael Chen",
-      "email": "michael.chen@example.com",
-      "id": 5,
-      "phone": "+1-555-555-5559",
-      "company": "Example Group"
-    }
-  ]
-  
+  useEffect(() => {
+    getApps();
+  }, []);
 
   const columns = [
     {
@@ -166,16 +141,16 @@ const Users = () => {
      }
     },
     {
-     name: "phone",
-     label: "Phone",
+     name: "status_code",
+     label: "Status",
      options: {
       filter: true,
       sort: false,
      }
     },
     {
-     name: "company",
-     label: "Company",
+     name: "country_code",
+     label: "Country",
      options: {
       filter: true,
       sort: false,
@@ -255,27 +230,46 @@ const Users = () => {
 
   return (
     <AdminSidebar>
-    <RegisterUserModal registerModal={registerModal} closeRegisterModal={closeRegisterModal}/>
-    <h1 className="text-2xl text-primary mb-6">All Users</h1>
-    <h4 className="text-md text-primary">A list of all the users </h4>
-    <div className="flex justify-end">
-        <button
-          type="button"
-          className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
-          onClick={() =>setRegisterModal(true)}
-        >
-          <PersonAddAlt1Icon />
-          <p className="ml-4">Register User</p>
-        </button>
-      </div>
+    <h1 className="text-2xl text-primary mb-6">All Applications</h1>
+    <h4 className="text-md text-primary">A list of all the applications </h4>
+    {/* <div className="flex justify-end">
+      <button
+        type="button"
+        className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+        onClick={() =>setSmsModal(true)}
+      >
+        <SendToMobileIcon />
+        <p className="ml-4">Send</p>
+      </button>
+      <button
+        type="button"
+        className="text-white w-42 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+        onClick={() =>setBroadcastModal(true)}
+      >
+        <SendIcon />
+        <p className="ml-4">Broadcast</p>
+      </button>
+      <button
+        type="button"
+        className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+        // onClick={() =>setSmsModal(true)}
+      >
+        <ScheduleSendIcon />
+        <p className="ml-4">Schedule</p>
+      </button>
+    </div>
+    <SendSmsModal smsModal={smsModal} closeSendModal={closeSendModal}/>
+    <BroadcastModal broadcastModal={broadcastModal} closeBroadcastModal={closeBroadcastModal}/> */}
+
+
     <div className="mt-4">
       <ThemeProvider theme={getMuiTheme()}>
 
-        <Table columns={columns} options={options} data={users} />
+        <Table columns={columns} options={options} data={apps} />
       </ThemeProvider>
     </div>
     </AdminSidebar>
   );
 };
 
-export default Users;
+export default AllApps;

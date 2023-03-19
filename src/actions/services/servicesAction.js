@@ -2,12 +2,12 @@ import axios from 'axios';
 import apiUrl from "../../utils/apiUtils/apiUrl";
 import { authHeaders } from '../../utils/headers/headers';
 
-export function serviceCreateAction(formValues) {
-    const serviceCreateUrl = apiUrl.CREATE_SERVICE;
+export function servicesAction(app_id) {
+    const servicesUrl = apiUrl.LIST_SERVICES;
     const config = authHeaders();
   
     return axios
-      .post(serviceCreateUrl, config, formValues)
+      .get(servicesUrl, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {

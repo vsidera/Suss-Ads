@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./styles.css"
+import "./styles.css";
 
 import { appsAction } from "../../actions/applications/appsActions";
 import AppsCard from "../../components/appsCard/appsCard";
@@ -30,7 +30,9 @@ const Applications = () => {
 
   return (
     <>
-      <h1 className="text-2xl text-primary mb-6 flex justify-center">Applications</h1>
+      <h1 className="text-2xl text-primary mb-6 flex justify-center">
+        Applications
+      </h1>
       <h4 className="text-md text-primary flex justify-center mb-6">
         A list of Applications for the user
       </h4>
@@ -39,15 +41,26 @@ const Applications = () => {
           className="flex flex-col justify-start items-center mt-6"
           style={{ width: "90vw" }}
         >
+          <Link
+            to="/admin"
+            className="bg-white rounded-lg shadow-md p-4 m-2 w-2/4 h-24 flex flex-col justify-center items-center"
+          >
+
+              <h2 className="text-xl font-bold">Admin</h2>
+
+          </Link>
           {apps.map((app, index) => (
-            <Link to={`/apps/${app.code}`} key={index} className="bg-white rounded-lg shadow-md p-4 m-2 w-2/4 h-24 flex flex-col justify-center items-center">
-            <AppsCard key={index} {...app} />
+            <Link
+              to={`/apps/${app.code}`}
+              key={index}
+              className="bg-white rounded-lg shadow-md p-4 m-2 w-2/4 h-24 flex flex-col justify-center items-center"
+            >
+              <AppsCard key={index} {...app} />
             </Link>
           ))}
         </div>
       </div>
-      </>
-
+    </>
   );
 };
 
