@@ -2,12 +2,8 @@ import { useEffect, useState } from "react";
 import Sidebar from "../../components/sidebar/sidebar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Table from "../../components/table/table";
-import { contactsAction } from "../../actions/contacts/contactsAction";
-import AddIcon from "@mui/icons-material/Add";
-import UploadIcon from '@mui/icons-material/Upload';
-import CreateModal from "../../components/modals/create_contact";
-import FileUpload from "../../components/file_upload/file_upload";
 import { appservicesAction } from "../../actions/appservices/appservicesAction";
+import {useParams} from 'react-router-dom';
 
 const getMuiTheme = () =>
   createTheme({
@@ -103,12 +99,16 @@ const getMuiTheme = () =>
   });
 
 const AppServices = () => {
+  const params = useParams();
+
+  const app_id = params.id
+
   const [appservices, setAppservices] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const getAppServices = () => {
 
-    appservicesAction()
+    appservicesAction(app_id)
       .then((res) => {
         if (res.errors) {
           console.log("AN ERROR HAS OCCURED");
@@ -128,7 +128,7 @@ const AppServices = () => {
 
   const columns = [
     {
-      name: "id",
+      name: "appname",
       label: "Name",
       options: {
         filter: true,
@@ -136,24 +136,24 @@ const AppServices = () => {
       },
     },
     {
-      name: "source",
-      label: "Company",
+      name: "telco",
+      label: "Telco",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: "direction",
-      label: "City",
+      name: "sendername",
+      label: "Sender",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: "status_desc",
-      label: "State",
+      name: "appemail",
+      label: "Email",
       options: {
         filter: true,
         sort: false,
@@ -165,9 +165,7 @@ const AppServices = () => {
     filter: false,
     filterType: "textField",
     responsive: "standard",
-    search: false,
     print: false,
-    searchPlaceholder: "Search By Name,Account Number & PayPlans",
     tableId: "03009226196169874",
     fixedHeader: true,
     fontFamily: "Ubuntu",
@@ -195,9 +193,6 @@ const AppServices = () => {
         .trim();
       return val;
     },
-
-    searchOpen: true,
-    searchText: " ",
 
     textLabels: {
       body: {

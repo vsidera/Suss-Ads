@@ -8,6 +8,7 @@ import SendToMobileIcon from '@mui/icons-material/SendToMobile';
 import SendSmsModal from "../../components/modals/send_sms";
 import BroadcastModal from "../../components/modals/broadcast";
 import ScheduleSendIcon from '@mui/icons-material/ScheduleSend';
+import {useParams} from 'react-router-dom';
 
 const getMuiTheme = () =>
     createTheme({
@@ -110,11 +111,15 @@ const Messages = () => {
   const [smsModal, setSmsModal] = useState(false)
   const [broadcastModal, setBroadcastModal] = useState(false)
 
+  const params = useParams();
+
+  const app_id = params.id
+
   const getMessages = () => {
 
-    console.log("THIS GETS HERE!!!!!!!!")
+    
 
-    messagesAction()
+    messagesAction(app_id)
       .then((res) => {
         if (res.errors) {
           console.log("AN ERROR HAS OCCURED")
@@ -182,9 +187,7 @@ const Messages = () => {
     filter: false,
     filterType: 'textField',
     responsive: 'standard',
-    search: false,
     print: false,
-    searchPlaceholder: 'Search By Name,Account Number & PayPlans',
     tableId: "03009226196169874",
     fixedHeader: true,
     fontFamily: 'Ubuntu',
@@ -209,9 +212,6 @@ const Messages = () => {
       let val = `${buildHead(columns)}${buildBody(data)}`.replace(/[^\x00-\x7F]/g, "").toString().trim();
       return val;
     },
-
-    searchOpen: true,
-    searchText: " ",
    
     textLabels: {
       body: {

@@ -103,8 +103,10 @@ const getMuiTheme = () =>
   });
 
 const Contacts = () => {
-  const {id} = useParams();
-  
+  const params = useParams();
+
+  const app_id = params.id
+
   const [contacts, setContacts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [createModal, setCreateModal] = useState(false);
@@ -113,13 +115,13 @@ const Contacts = () => {
   const getContacts = () => {
     console.log("THIS GETS HERE!!!!!!!!");
 
-    contactsAction()
+    contactsAction(app_id)
       .then((res) => {
         if (res.errors) {
           console.log("AN ERROR HAS OCCURED");
         } else {
           setContacts(res.data);
-          setIsLoaded(true);
+         
         }
       })
       .catch((err) => {
@@ -140,12 +142,16 @@ const Contacts = () => {
 
   useEffect(() => {
     getContacts();
+    setIsLoaded(true)
+
   }, []);
+
+  console.log("CONTACTS ARE......", contacts)
 
   const columns = [
     {
       name: "id",
-      label: "Name",
+      label: "First Name",
       options: {
         filter: true,
         sort: true,
@@ -153,23 +159,23 @@ const Contacts = () => {
     },
     {
       name: "source",
-      label: "Company",
+      label: "Last Name",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: "direction",
-      label: "City",
+      name: "mobile_no",
+      label: "Mobile No",
       options: {
         filter: true,
         sort: false,
       },
     },
     {
-      name: "status_desc",
-      label: "State",
+      name: "status_code",
+      label: "Status",
       options: {
         filter: true,
         sort: false,
@@ -181,9 +187,7 @@ const Contacts = () => {
     filter: false,
     filterType: "textField",
     responsive: "standard",
-    search: false,
     print: false,
-    searchPlaceholder: "Search By Name,Account Number & PayPlans",
     tableId: "03009226196169874",
     fixedHeader: true,
     fontFamily: "Ubuntu",
@@ -211,9 +215,6 @@ const Contacts = () => {
         .trim();
       return val;
     },
-
-    searchOpen: true,
-    searchText: " ",
 
     textLabels: {
       body: {

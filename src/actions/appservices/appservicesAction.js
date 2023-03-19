@@ -2,12 +2,12 @@ import axios from 'axios';
 import apiUrl from "../../utils/apiUtils/apiUrl";
 import { authHeaders } from '../../utils/headers/headers';
 
-export function appservicesAction(formValues) {
-    const contactsUrl = apiUrl.LIST_CONTACTS;
+export function appservicesAction(app_id) {
+  const appServicesUrl = `${apiUrl.LIST_APP_SERVICES}/${app_id}/service/list`;
     const config = authHeaders();
   
     return axios
-      .get(contactsUrl, config, formValues)
+      .get(appServicesUrl, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {

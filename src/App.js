@@ -23,7 +23,6 @@ function App() {
           <Route path='apps/:id/messages' element={<Messages/>} />
           <Route path='apps/:id/appservices' element={<AppServices/>} />
           <Route path='apps' element={<Applications/>} />
-          {/* <Route exact path="/apps/:id" component={AppDetails} /> */}
         </Routes>
     
       </BrowserRouter>
