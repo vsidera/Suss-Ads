@@ -39,7 +39,7 @@ const Login = () => {
           // setSuccess(true);
           // setActionType('');
           setTimeout(() => {
-            navigate("/home");
+            navigate("/apps");
             // props.history.push('/sidebar');
           }, 1000);
         }

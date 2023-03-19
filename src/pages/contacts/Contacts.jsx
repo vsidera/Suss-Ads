@@ -7,6 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import UploadIcon from '@mui/icons-material/Upload';
 import CreateModal from "../../components/modals/create_contact";
 import FileUpload from "../../components/file_upload/file_upload";
+import {useParams} from 'react-router-dom';
 
 const getMuiTheme = () =>
   createTheme({
@@ -102,6 +103,8 @@ const getMuiTheme = () =>
   });
 
 const Contacts = () => {
+  const {id} = useParams();
+  
   const [contacts, setContacts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [createModal, setCreateModal] = useState(false);

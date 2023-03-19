@@ -4,9 +4,14 @@ import { NavLink } from 'react-router-dom';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../../pages/login/Login";
+import {useParams} from 'react-router-dom';
 
 export default function Sidebar({children}) {
     const [open, setOpen] = useState(false);
+    const {id} = useParams();
+
+    console.log("ID IS!!!!!!!!!", id)
+
     return (
         <div className="flex">
             <div
@@ -70,7 +75,7 @@ export default function Sidebar({children}) {
                         <ul className="pt-2 pb-4 space-y-1 text-sm">
                             <li className="rounded-sm">
                                 <a
-                                    href="/contacts"
+                                    href={`/apps/${id}/contacts`}
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -95,7 +100,7 @@ export default function Sidebar({children}) {
                             </li>
                             <li className="rounded-sm">
                                 <a
-                                    href="/messages"
+                                    href={`/apps/${id}/messages`}
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -118,7 +123,7 @@ export default function Sidebar({children}) {
                             </li>
                             <li className="rounded-sm">
                                 <a
-                                    href="/appservices"
+                                    href={`/apps/${id}/appservices`}
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
