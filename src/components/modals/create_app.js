@@ -36,7 +36,7 @@ const CreateAppModal = ({
 >
   <div>
     <Box sx={style}>
-      <CardContent>
+      <CardContent style={{ width: "60%" }}>
         <div className="text-center content-center">
           <p className="text-xl">CREATE ORGANISATION</p>
 

@@ -80,7 +80,7 @@ export default function Sidebar({children}) {
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="w-6 h-6 text-gray-100"
+                                        className="w-6 h-6 text-gray-300 stroke-width-1"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -94,7 +94,7 @@ export default function Sidebar({children}) {
                                     </svg>
                     
                          
-                                    <span className="text-gray-100">Contacts</span>
+                                    <span className="text-white text-xl text-thin font-extralight">Contacts</span>
                  
                                 </a>
                             </li>
@@ -105,7 +105,7 @@ export default function Sidebar({children}) {
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="w-6 h-6 text-gray-100"
+                                        className="w-6 h-6 text-gray-300 stroke-width-1"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -118,7 +118,7 @@ export default function Sidebar({children}) {
                                         />
                                     </svg>
                        
-                                    <span className="text-gray-100">Messages</span>
+                                    <span className="text-white text-xl text-thin font-extralight">Messages</span>
                                 </a>
                             </li>
                             <li className="rounded-sm">
@@ -128,7 +128,7 @@ export default function Sidebar({children}) {
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="w-6 h-6 text-gray-100"
+                                        className="w-6 h-6 text-gray-300 stroke-width-1"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -140,7 +140,7 @@ export default function Sidebar({children}) {
                                             d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                                         />
                                     </svg>
-                                    <span className="text-gray-100">
+                                    <span className="text-white text-xl text-thin font-extralight">
                                         App Services
                                     </span>
                                 </a>
@@ -152,7 +152,7 @@ export default function Sidebar({children}) {
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="w-6 h-6 text-gray-100"
+                                        className="w-6 h-6 text-gray-300 stroke-width-1"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -169,19 +169,19 @@ export default function Sidebar({children}) {
                                             d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                                         />
                                     </svg>
-                                    <span className="text-gray-100">
+                                    <span className="text-white text-xl text-thin font-extralight">
                                         Suss
                                     </span>
                                 </a>
                             </li>
-                            <li className="rounded-sm">
+                            <li className="rounded-sm mt-8">
                                 <a
                                     href="#"
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="w-6 h-6 text-gray-100"
+                                        className="w-6 h-6 text-gray-300 stroke-width-1"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -193,7 +193,7 @@ export default function Sidebar({children}) {
                                             d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                                         />
                                     </svg>
-                                    <span className="text-gray-100">
+                                    <span className="text-white text-xl text-thin font-extralight">
                                         Logout
                                     </span>
                                 </a>
