@@ -4,10 +4,11 @@ import "./styles.css";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Table from "../../components/table/table"
 import { appsAction } from "../../actions/applications/appsActions";
-import AppsCard from "../../components/appsCard/appsCard";
 import AdminSidebar from "../../components/adminSidebar/adminSidebar";
 import CreateAppModal from "../../components/modals/create_app";
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import AddLinkIcon from '@mui/icons-material/AddLink';
+import AttachServiceModal from "../../components/modals/attach_service";
 
 const getMuiTheme = () =>
   createTheme({
@@ -107,11 +108,23 @@ const AllApps = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [createAppModal, setCreateAppModal] = useState(false);
+  const [attachServiceModal, setAttachServiceModal] = useState(false);
 
   const closeCreateAppModal = (e) => {
     e.preventDefault();
     setCreateAppModal(false)
   }
+
+  const closeAttachServiceModal = (e) => {
+    e.preventDefault();
+    setAttachServiceModal(false)
+  }
+
+  const handleClick = () => {
+    console.log('AddBusinessIcon clicked!');
+    setAttachServiceModal(true)
+  }
+
 
   const getApps = () => {
     appsAction()
@@ -165,6 +178,21 @@ const AllApps = () => {
       sort: false,
      }
     },
+    {
+      name: "",
+      label: "Attach",
+      options: {
+       filter: true,
+       sort: false,
+       customBodyRender: (tableMeta, dataIndex, rowIndex) => {
+        return (
+          <button onClick={handleClick}>
+          <AddLinkIcon />
+          </button>
+        );
+      }
+      }
+     },
    ];
 
   const options = {
@@ -240,6 +268,7 @@ const AllApps = () => {
   return (
     <AdminSidebar>
     <CreateAppModal createAppModal={createAppModal} closeCreateAppModal={closeCreateAppModal}/>
+    <AttachServiceModal attachServiceModal={attachServiceModal} closeAttachServiceModal={closeAttachServiceModal}/>
     <h1 className="text-2xl text-primary mb-6">All Organisations</h1>
     <h4 className="text-md text-primary">A list of all the Organisations </h4>
     <div className="flex justify-end">

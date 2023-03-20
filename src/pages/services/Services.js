@@ -238,7 +238,7 @@ const AllServices = () => {
   return (
     <AdminSidebar>
     <CreateServiceModal createServiceModal={createServiceModal} closeCreateServiceModal={closeCreateServiceModal}/>
-    <h1 className="text-2xl text-primary mb-6">All Servicess</h1>
+    <h1 className="text-2xl text-primary mb-6">All Services</h1>
     <h4 className="text-md text-primary">A list of all the services </h4>
     <div className="flex justify-end">
         <button
