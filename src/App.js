@@ -10,7 +10,7 @@ import Messages from "./pages/messages/Messages";
 import AppServices from "./pages/app_services/app_services";
 import Applications from "./pages/applications/Applications";
 import AllApps from "./pages/applications/AllApps";
-import AllServices from "./pages/services/services";
+import AllServices from "./pages/services/Services";
 
 function App() {
   return (

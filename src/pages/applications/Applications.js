@@ -31,10 +31,10 @@ const Applications = () => {
   return (
     <>
       <h1 className="text-2xl text-primary mb-6 flex justify-center">
-        Applications
+        Organisations
       </h1>
       <h4 className="text-md text-primary flex justify-center mb-6">
-        A list of Applications for the user
+        A list of Organisations for the user
       </h4>
       <div className="flex justify-center h-screen bg-gray-100 shadow-lg shadow-top rounded-lg mb-4 m-16">
         <div

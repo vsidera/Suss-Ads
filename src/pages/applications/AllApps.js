@@ -6,6 +6,8 @@ import Table from "../../components/table/table"
 import { appsAction } from "../../actions/applications/appsActions";
 import AppsCard from "../../components/appsCard/appsCard";
 import AdminSidebar from "../../components/adminSidebar/adminSidebar";
+import CreateAppModal from "../../components/modals/create_app";
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 
 const getMuiTheme = () =>
   createTheme({
@@ -103,6 +105,13 @@ const getMuiTheme = () =>
 const AllApps = () => {
   const [apps, setApps] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const [createAppModal, setCreateAppModal] = useState(false);
+
+  const closeCreateAppModal = (e) => {
+    e.preventDefault();
+    setCreateAppModal(false)
+  }
 
   const getApps = () => {
     appsAction()
@@ -230,37 +239,19 @@ const AllApps = () => {
 
   return (
     <AdminSidebar>
-    <h1 className="text-2xl text-primary mb-6">All Applications</h1>
-    <h4 className="text-md text-primary">A list of all the applications </h4>
-    {/* <div className="flex justify-end">
-      <button
-        type="button"
-        className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
-        onClick={() =>setSmsModal(true)}
-      >
-        <SendToMobileIcon />
-        <p className="ml-4">Send</p>
-      </button>
-      <button
-        type="button"
-        className="text-white w-42 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
-        onClick={() =>setBroadcastModal(true)}
-      >
-        <SendIcon />
-        <p className="ml-4">Broadcast</p>
-      </button>
-      <button
-        type="button"
-        className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
-        // onClick={() =>setSmsModal(true)}
-      >
-        <ScheduleSendIcon />
-        <p className="ml-4">Schedule</p>
-      </button>
-    </div>
-    <SendSmsModal smsModal={smsModal} closeSendModal={closeSendModal}/>
-    <BroadcastModal broadcastModal={broadcastModal} closeBroadcastModal={closeBroadcastModal}/> */}
-
+    <CreateAppModal createAppModal={createAppModal} closeCreateAppModal={closeCreateAppModal}/>
+    <h1 className="text-2xl text-primary mb-6">All Organisations</h1>
+    <h4 className="text-md text-primary">A list of all the Organisations </h4>
+    <div className="flex justify-end">
+        <button
+          type="button"
+          className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+          onClick={() =>setCreateAppModal(true)}
+        >
+          <AddBusinessIcon />
+          <p className="ml-4">Create Org.</p>
+        </button>
+      </div>
 
     <div className="mt-4">
       <ThemeProvider theme={getMuiTheme()}>

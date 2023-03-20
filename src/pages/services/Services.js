@@ -4,6 +4,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Table from "../../components/table/table"
 import AdminSidebar from "../../components/adminSidebar/adminSidebar";
 import {servicesAction} from "../../actions/services/servicesAction"
+import CreateServiceModal from "../../components/modals/create_service";
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 
 const getMuiTheme = () =>
   createTheme({
@@ -101,6 +103,13 @@ const getMuiTheme = () =>
 const AllServices = () => {
   const [services, setServices] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const [createServiceModal, setCreateServiceModal] = useState(false);
+
+  const closeCreateServiceModal = (e) => {
+    e.preventDefault();
+    setCreateServiceModal(false)
+  }
 
   const getServices = () => {
     servicesAction()
@@ -228,8 +237,19 @@ const AllServices = () => {
 
   return (
     <AdminSidebar>
+    <CreateServiceModal createServiceModal={createServiceModal} closeCreateServiceModal={closeCreateServiceModal}/>
     <h1 className="text-2xl text-primary mb-6">All Servicess</h1>
     <h4 className="text-md text-primary">A list of all the services </h4>
+    <div className="flex justify-end">
+        <button
+          type="button"
+          className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+          onClick={() =>setCreateServiceModal(true)}
+        >
+          <LibraryAddIcon />
+          <p className="ml-4">Add Service</p>
+        </button>
+      </div>
 
     <div className="mt-4">
       <ThemeProvider theme={getMuiTheme()}>
