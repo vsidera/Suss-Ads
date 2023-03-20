@@ -128,7 +128,7 @@ const AllServices = () => {
 
   useEffect(() => {
     getServices();
-  }, []);
+  }, [createServiceModal]);
 
   const columns = [
     {

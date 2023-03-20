@@ -3,11 +3,58 @@ import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import { Backdrop } from "@mui/material";
 import { Box, CardContent, TextField } from '@mui/material';
+import { serviceCreate } from "../../actions/services/servicesAction";
+import SnackbarAlert from "../utils/snackbar";
 
 const CreateServiceModal = ({
   createServiceModal,
   closeCreateServiceModal,
 }) => {
+
+  const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
+  const [eventType, setEventType] = useState('');
+  const [eventMessage, setEventMessage] = useState('');
+  const [eventTitle, setEventTitle] = useState('');
+
+  const [state, setState] = React.useState({
+    sender: '',
+    provider: '',
+    country_code: '',
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setState({
+      ...state,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newService = {
+      sender: state.sender,
+      provider: state.provider,
+      country_code: state.country_code,
+    };
+
+    const res = serviceCreate(newService).then((res) => {
+      if (res.status === 201) {
+        setEventType('success');
+        setEventMessage('Service Successfully Created');
+        setEventTitle('SERVICE CREATE');
+        setIsSnackBarAlertOpen(true);
+      } else {
+        setEventType('fail');
+        setEventMessage('Service NOT Created');
+        setEventTitle('SERVICE CREATE');
+        setIsSnackBarAlertOpen(true);
+      }
+    });
+
+    return res;
+  };
 
   const style = {
     position: "absolute",
@@ -29,6 +76,13 @@ const CreateServiceModal = ({
 
   return (
     <>
+    <SnackbarAlert
+        open={isSnackBarAlertOpen}
+        type={eventType}
+        message={eventMessage}
+        handleClose={() => setIsSnackBarAlertOpen(false)}
+        title={eventTitle}
+      />
       <Modal
   open={createServiceModal}
   sx={{ border: "none", boxShadow: "none" }}
@@ -46,34 +100,44 @@ const CreateServiceModal = ({
             <div className="my-2">
               <TextField
                 id="outlined-basic"
+                name="sender"
                 label="Sender"
                 variant="outlined"
                 className="w-full"
-                type="number"
+                type="text"
+                value={state.sender}
+                onChange={handleChange}
               />
             </div>
 
             <div className="my-2">
               <TextField
                 id="outlined-basic"
+                name="provider"
                 label="Provider"
                 variant="outlined"
                 className="w-full"
+                value={state.provider}
+                onChange={handleChange}
               />
             </div>
 
             <div className="my-2">
               <TextField
                 id="outlined-basic"
+                name="country_code"
                 label="Country Code"
                 variant="outlined"
                 className="w-full"
+                value={state.country_code}
+                onChange={handleChange}
               />
             </div>
 
             <button
               className="bg-[#9B9DEE] text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
               style={{ marginTop: "2rem", alignSelf: "center" }}
+              onClick={handleSubmit}
             >
               SUBMIT
             </button>

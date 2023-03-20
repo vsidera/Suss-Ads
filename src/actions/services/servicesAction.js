@@ -34,12 +34,12 @@ export function servicesAction(app_id) {
       });
   }
 
-  export function serviceCreateAction(formValues) {
-    const appCreateUrl = apiUrl.CREATE_APP;
+  export function serviceCreate(formValues) {
+    const appCreateUrl = apiUrl.CREATE_SERVICE;
     const config = authHeaders();
   
     return axios
-      .post(appCreateUrl, config, formValues)
+      .post(appCreateUrl, formValues, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {
