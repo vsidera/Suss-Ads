@@ -2,10 +2,56 @@ import React from "react";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
+import SnackbarAlert from "../utils/snackbar";
+import { broadcastMessages } from "../../actions/messages/messagesAction"
 
 const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
 
-  const [message, setMessage] = useState("");
+  const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
+  const [eventType, setEventType] = useState('');
+  const [eventMessage, setEventMessage] = useState('');
+  const [eventTitle, setEventTitle] = useState('');
+
+  const [state, setState] = React.useState({
+    requestid: '',
+    content: '',
+    scheduled: '',
+    destinations: []
+});
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setState({
+      ...state,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newSms = {
+      mobile_no: state.mobile_no,
+      message: state.message
+    };
+
+    const res = broadcastMessages(newSms).then((res) => {
+      if (res.status === 201) {
+        setEventType('success');
+        setEventMessage('Contact Successfully Created');
+        setEventTitle('CONTACT CREATE');
+        setIsSnackBarAlertOpen(true);
+      } else {
+        setEventType('fail');
+        setEventMessage('Contact NOT Created');
+        setEventTitle('CONTACT CREATE');
+        setIsSnackBarAlertOpen(true);
+      }
+    });
+
+    return res;
+  };
+
   const style = {
     position: "absolute",
     top: "40%",
@@ -24,19 +70,15 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
     borderRadius: 3,
   };
 
-  const handleTextareaChange = (event) => {
-    setMessage(event.target.value);
-  };
-
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    console.log("Mobile No:", event.target.elements.mobileNo.value);
-    console.log("Message:", message);
-    closeBroadcastModal();
-  };
-
   return (
     <>
+    <SnackbarAlert
+        open={isSnackBarAlertOpen}
+        type={eventType}
+        message={eventMessage}
+        handleClose={() => setIsSnackBarAlertOpen(false)}
+        title={eventTitle}
+      />
       <Modal
         open={broadcastModal}
         sx={{ border: "none", boxShadow: "none" }}
@@ -58,14 +100,16 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
                       variant="outlined"
                       type="number"
                       fullWidth
+                      value={state.mobile_no}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="my-2">
                     <TextareaAutosize
                       aria-label="empty textarea"
                       placeholder="Type your message here"
-                      value={message}
-                      onChange={handleTextareaChange}
+                      value={state.message}
+                      onChange={handleChange}
                       minRows={3}
                       style={{
                         width: "100%",
@@ -78,7 +122,7 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
                   <button
                     className="bg-[#9B9DEE] text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
                     style={{ marginTop: "2rem", alignSelf: "center" }}
-                    onClick={handleFormSubmit}
+                    onClick={handleSubmit}
                   >
                     SUBMIT
                   </button>
