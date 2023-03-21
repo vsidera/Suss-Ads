@@ -33,3 +33,35 @@ export function appsAction(formValues) {
         };
       });
   }
+
+  export function appCreate(formValues) {
+    const appCreateUrl = apiUrl.CREATE_APP;
+    const config = authHeaders();
+  
+    return axios
+      .post(appCreateUrl, formValues, config)
+      .then((res) => {
+      
+        if (res.data && res.status === 200) {
+
+            console.log("THE RESPONSE IS !!!!!!!",res)
+          
+        }
+        return res;
+      })
+      .catch((error) => {
+        if (error.response) {
+        
+          return {
+            errors: {
+              _error: 'The app could not be created.',
+            },
+          };
+        }   
+        return {
+          errors: {
+            _error: 'Network error. Please try again.',
+          },
+        };
+      });
+  }  

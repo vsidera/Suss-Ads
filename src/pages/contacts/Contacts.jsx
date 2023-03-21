@@ -24,7 +24,7 @@ const getMuiTheme = () =>
           },
         },
       },
-      //@ts-ignore
+      //@ts-ignoreimport {useParams} from 'react-router-dom';
       MUIDataTableBodyCell: {
         styleOverrides: {
           root: {
@@ -259,7 +259,7 @@ const Contacts = () => {
 
   return (
     <Sidebar>
-      <CreateModal createModal={createModal} closeCreateModal={closeCreateModal}/>
+      <CreateModal createModal={createModal} closeCreateModal={closeCreateModal} app_id={app_id}/>
       <h1 className="text-2xl text-primary mb-6">Contacts</h1>
       <h4 className="text-md text-primary">A list of contacts for the client</h4>
       <div className="flex justify-end">

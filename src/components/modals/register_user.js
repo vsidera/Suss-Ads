@@ -3,11 +3,60 @@ import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import { Backdrop } from "@mui/material";
 import { Box, CardContent, TextField } from '@mui/material';
+import SnackbarAlert from "../utils/snackbar";
+import { userCreate } from "../../actions/login/loginAction";
 
 const RegisterUserModal = ({
   registerModal,
   closeRegisterModal,
 }) => {
+
+    const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
+    const [eventType, setEventType] = useState('');
+    const [eventMessage, setEventMessage] = useState('');
+    const [eventTitle, setEventTitle] = useState('');
+  
+    const [state, setState] = React.useState({
+      email: '',
+      firstname: '',
+      lastname: '',
+      password: ''
+    });
+  
+    const handleChange = (e) => {
+      const value = e.target.value;
+      setState({
+        ...state,
+        [e.target.name]: value,
+      });
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+  
+      const newUser = {
+        email: state.email,
+        firstname: state.firstname,
+        lastname: state.lastname,
+        password: state.password
+      };
+  
+      const res = userCreate(newUser).then((res) => {
+        if (res.status === 201) {
+          setEventType('success');
+          setEventMessage('User Successfully Created');
+          setEventTitle('USER CREATE');
+          setIsSnackBarAlertOpen(true);
+        } else {
+          setEventType('fail');
+          setEventMessage('USER NOT Created');
+          setEventTitle('USER CREATE');
+          setIsSnackBarAlertOpen(true);
+        }
+      });
+  
+      return res;
+    };
 
   const style = {
     position: "absolute",
@@ -29,6 +78,13 @@ const RegisterUserModal = ({
 
   return (
     <>
+    <SnackbarAlert
+        open={isSnackBarAlertOpen}
+        type={eventType}
+        message={eventMessage}
+        handleClose={() => setIsSnackBarAlertOpen(false)}
+        title={eventTitle}
+      />
       <Modal
   open={registerModal}
   sx={{ border: "none", boxShadow: "none" }}
@@ -46,43 +102,56 @@ const RegisterUserModal = ({
             <div className="my-2">
               <TextField
                 id="outlined-basic"
+                name="email"
                 label="Email"
                 variant="outlined"
                 className="w-full"
                 type="text"
+                value={state.email}
+                onChange={handleChange}
               />
             </div>
 
             <div className="my-2">
               <TextField
                 id="outlined-basic"
+                name="firstname"
                 label="First Name"
                 variant="outlined"
                 className="w-full"
+                value={state.firstname}
+                onChange={handleChange}
               />
             </div>
 
             <div className="my-2">
               <TextField
                 id="outlined-basic"
+                name="lastname"
                 label="Last Name"
                 variant="outlined"
                 className="w-full"
+                value={state.lastname}
+                onChange={handleChange}
               />
             </div>
             <div className="my-2">
               <TextField
                 id="outlined-basic"
+                name="password"
                 label="Password"
                 variant="outlined"
                 className="w-full"
                 type="password"
+                value={state.password}
+                onChange={handleChange}
               />
             </div>
 
             <button
               className="bg-[#9B9DEE] text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
               style={{ marginTop: "2rem", alignSelf: "center" }}
+              onClick={handleSubmit}
             >
               SUBMIT
             </button>

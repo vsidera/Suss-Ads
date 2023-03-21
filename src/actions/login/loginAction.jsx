@@ -34,16 +34,18 @@ export function loginAction(formValues) {
       });
   }
 
-  export function registerAction(formValues) {
-    const registerUser = apiUrl.REGISTER_USER;
+  export function userCreate(formValues) {
+    const userCreateUrl = apiUrl.CREATE_USER;
     const config = authHeaders();
   
     return axios
-      .post(registerUser,config, formValues)
+      .post(userCreateUrl, formValues, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {
 
+            console.log("THE RESPONSE IS !!!!!!!",res)
+          
         }
         return res;
       })
@@ -52,7 +54,7 @@ export function loginAction(formValues) {
         
           return {
             errors: {
-              _error: 'The credentials you have entered are not correct.',
+              _error: 'The user could not be created.',
             },
           };
         }   
@@ -62,4 +64,4 @@ export function loginAction(formValues) {
           },
         };
       });
-  }
+  }  

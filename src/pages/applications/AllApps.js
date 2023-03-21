@@ -7,8 +7,10 @@ import { appsAction } from "../../actions/applications/appsActions";
 import AdminSidebar from "../../components/adminSidebar/adminSidebar";
 import CreateAppModal from "../../components/modals/create_app";
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import AttachServiceModal from "../../components/modals/attach_service";
+import AttachUserModal from "../../components/modals/attach_user";
 
 const getMuiTheme = () =>
   createTheme({
@@ -109,6 +111,7 @@ const AllApps = () => {
 
   const [createAppModal, setCreateAppModal] = useState(false);
   const [attachServiceModal, setAttachServiceModal] = useState(false);
+  const [attachUserModal, setAttachUserModal] = useState(false);
 
   const closeCreateAppModal = (e) => {
     e.preventDefault();
@@ -120,9 +123,17 @@ const AllApps = () => {
     setAttachServiceModal(false)
   }
 
+  const closeAttachUserModal = (e) => {
+    e.preventDefault();
+    setAttachUserModal(false)
+  }
+
   const handleClick = () => {
-    console.log('AddBusinessIcon clicked!');
     setAttachServiceModal(true)
+  }
+
+  const handleClick1 = () => {
+    setAttachUserModal(true)
   }
 
 
@@ -143,7 +154,7 @@ const AllApps = () => {
 
   useEffect(() => {
     getApps();
-  }, []);
+  }, [createAppModal]);
 
   const columns = [
     {
@@ -188,6 +199,21 @@ const AllApps = () => {
         return (
           <button onClick={handleClick}>
           <AddLinkIcon />
+          </button>
+        );
+      }
+      }
+     },
+     {
+      name: "",
+      label: "Attach",
+      options: {
+       filter: true,
+       sort: false,
+       customBodyRender: (tableMeta, dataIndex, rowIndex) => {
+        return (
+          <button onClick={handleClick1}>
+          <PersonAddIcon />
           </button>
         );
       }
@@ -269,6 +295,7 @@ const AllApps = () => {
     <AdminSidebar>
     <CreateAppModal createAppModal={createAppModal} closeCreateAppModal={closeCreateAppModal}/>
     <AttachServiceModal attachServiceModal={attachServiceModal} closeAttachServiceModal={closeAttachServiceModal}/>
+    <AttachUserModal attachUserModal={attachUserModal} closeAttachUserModal={closeAttachUserModal}/>
     <h1 className="text-2xl text-primary mb-6">All Organisations</h1>
     <h4 className="text-md text-primary">A list of all the Organisations </h4>
     <div className="flex justify-end">

@@ -3,7 +3,7 @@ import apiUrl from "../../utils/apiUtils/apiUrl";
 import { authHeaders } from '../../utils/headers/headers';
 
 export function contactsAction(app_id) {
-  const contactsUrl = `${apiUrl.LIST_CONTACTS}/${app_id}/list`;
+    const contactsUrl = `${apiUrl.LIST_CONTACTS}/${app_id}/list`;
     const config = authHeaders();
   
     return axios
@@ -34,12 +34,13 @@ export function contactsAction(app_id) {
       });
   }
 
-  export function contactsCreateAction(formValues) {
-    const contactsUrl = apiUrl.CREATE_CONTACTS;
+  export function contactCreate(formValues) {
+    console.log("FORMVALUES ARE!!!!!!!!!!!!!",formValues)
+    const contactCreateUrl = `${apiUrl.CREATE_CONTACT}/${formValues.app_id}/create`;
     const config = authHeaders();
   
     return axios
-      .post(contactsUrl, config, formValues)
+      .post(contactCreateUrl, formValues.newContact, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {
@@ -54,7 +55,7 @@ export function contactsAction(app_id) {
         
           return {
             errors: {
-              _error: 'The contacts could not be returned.',
+              _error: 'The app could not be created.',
             },
           };
         }   
@@ -64,7 +65,7 @@ export function contactsAction(app_id) {
           },
         };
       });
-  }
+  }  
 
   export function uploadContacts(formValues) {
     const uploadContactsUrl = apiUrl.CREATE_CONTACTS;

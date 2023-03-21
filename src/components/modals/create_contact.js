@@ -3,11 +3,62 @@ import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import { Backdrop } from "@mui/material";
 import { Box, CardContent, TextField } from '@mui/material';
+import SnackbarAlert from "../utils/snackbar";
+import { contactCreate } from "../../actions/contacts/contactsAction";
 
 const CreateModal = ({
   createModal,
   closeCreateModal,
+  app_id
 }) => {
+
+  const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
+  const [eventType, setEventType] = useState('');
+  const [eventMessage, setEventMessage] = useState('');
+  const [eventTitle, setEventTitle] = useState('');
+
+  const [state, setState] = React.useState({
+    mobile_no: '',
+    firstname: '',
+    lastname: ''
+
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setState({
+      ...state,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newContact = {
+      mobile_no: state.mobile_no,
+      attributes: {
+        firstname: state.firstname,
+        lastname: state.lastname
+    },
+    };
+
+    const res = contactCreate({app_id,newContact}).then((res) => {
+      if (res.status === 201) {
+        setEventType('success');
+        setEventMessage('Contact Successfully Created');
+        setEventTitle('CONTACT CREATE');
+        setIsSnackBarAlertOpen(true);
+      } else {
+        setEventType('fail');
+        setEventMessage('Contact NOT Created');
+        setEventTitle('CONTACT CREATE');
+        setIsSnackBarAlertOpen(true);
+      }
+    });
+
+    return res;
+  };
 
   const style = {
     position: "absolute",
@@ -29,6 +80,13 @@ const CreateModal = ({
 
   return (
     <>
+    <SnackbarAlert
+        open={isSnackBarAlertOpen}
+        type={eventType}
+        message={eventMessage}
+        handleClose={() => setIsSnackBarAlertOpen(false)}
+        title={eventTitle}
+      />
       <Modal
   open={createModal}
   sx={{ border: "none", boxShadow: "none" }}
@@ -46,34 +104,44 @@ const CreateModal = ({
             <div className="my-2">
               <TextField
                 id="outlined-basic"
+                name="mobile_no"
                 label="Mobile No"
                 variant="outlined"
                 className="w-full"
                 type="number"
+                value={state.mobile_no}
+                onChange={handleChange}
               />
             </div>
 
             <div className="my-2">
               <TextField
                 id="outlined-basic"
+                name="firstname"
                 label="First Name"
                 variant="outlined"
                 className="w-full"
+                value={state.firstname}
+                onChange={handleChange}
               />
             </div>
 
             <div className="my-2">
               <TextField
                 id="outlined-basic"
+                name="lastname"
                 label="Last Name"
                 variant="outlined"
                 className="w-full"
+                value={state.lastname}
+                onChange={handleChange}
               />
             </div>
 
             <button
               className="bg-[#9B9DEE] text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
               style={{ marginTop: "2rem", alignSelf: "center" }}
+              onClick={handleSubmit}
             >
               SUBMIT
             </button>
