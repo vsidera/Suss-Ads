@@ -31,7 +31,9 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
 
     const newSms = {
       mobile_no: state.mobile_no,
-      message: state.message
+      message: state.content,
+      request_id: "123",
+      "scheduled":"2023-03-22T06:31:05"
     };
 
     const res = sendSms(newSms).then((res) => {
@@ -106,10 +108,10 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
                   </div>
                   <div className="my-2">
                     <TextareaAutosize
-                      id="message"
+                      id="content"
                       aria-label="empty textarea"
                       placeholder="Type your message here"
-                      value={state.message}
+                      value={state.content}
                       onChange={handleChange}
                       minRows={3}
                       style={{

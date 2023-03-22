@@ -144,7 +144,7 @@ const Contacts = () => {
     getContacts();
     setIsLoaded(true)
 
-  }, []);
+  }, [createModal]);
 
   console.log("CONTACTS ARE......", contacts)
 
@@ -198,6 +198,8 @@ const Contacts = () => {
     enableNestedDataAccess: ".",
     count: 30,
     elevation: 0,
+    selectableRowsHeader: true,
+    selectableRows: "multiple",
     rowsPerPageOptions: [10, 20, 50],
     downloadOptions: {
       separator: ",",

@@ -73,7 +73,7 @@ export function messagesAction(app_id) {
     const config = authHeaders();
   
     return axios
-      .get(sendSms, config, formValues)
+      .get(sendSms, formValues, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {
