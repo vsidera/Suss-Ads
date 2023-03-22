@@ -3,10 +3,10 @@ import Sidebar from "../../components/sidebar/sidebar"
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Table from "../../components/table/table"
 import { messagesAction } from "../../actions/messages/messagesAction";
-import SendIcon from '@mui/icons-material/Send';
+
 import SendToMobileIcon from '@mui/icons-material/SendToMobile';
 import SendSmsModal from "../../components/modals/send_sms";
-import BroadcastModal from "../../components/modals/broadcast";
+import ScheduleModal from "../../components/modals/schedule_sms";
 import ScheduleSendIcon from '@mui/icons-material/ScheduleSend';
 import {useParams} from 'react-router-dom';
 
@@ -109,15 +109,14 @@ const Messages = () => {
   const [messages, setMessages] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false)
   const [smsModal, setSmsModal] = useState(false)
-  const [broadcastModal, setBroadcastModal] = useState(false)
 
+  const [scheduleModal, setScheduleModal] = useState(false)
+  
   const params = useParams();
 
   const app_id = params.id
 
   const getMessages = () => {
-
-    
 
     messagesAction(app_id)
       .then((res) => {
@@ -136,11 +135,7 @@ const Messages = () => {
   const closeSendModal = (e) => {
     e.preventDefault();
     setSmsModal(false)
-  }
-
-  const closeBroadcastModal = (e) => {
-    e.preventDefault();
-    setBroadcastModal(false)
+    setScheduleModal(false)
   }
 
   useEffect(() => {
@@ -259,7 +254,8 @@ const Messages = () => {
       <h1 className="text-2xl text-primary mb-6">Messages</h1>
       <h4 className="text-md text-primary">A list of messages sent to the client</h4>
       <div className="flex justify-end">
-        <button
+        
+      <button
           type="button"
           className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
           onClick={() =>setSmsModal(true)}
@@ -269,23 +265,16 @@ const Messages = () => {
         </button>
         <button
           type="button"
-          className="text-white w-42 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
-          onClick={() =>setBroadcastModal(true)}
-        >
-          <SendIcon />
-          <p className="ml-4">Broadcast</p>
-        </button>
-        <button
-          type="button"
           className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
-          // onClick={() =>setSmsModal(true)}
+          onClick={() =>setScheduleModal(true)}
         >
           <ScheduleSendIcon />
           <p className="ml-4">Schedule</p>
         </button>
       </div>
       <SendSmsModal smsModal={smsModal} closeSendModal={closeSendModal}/>
-      <BroadcastModal broadcastModal={broadcastModal} closeBroadcastModal={closeBroadcastModal}/>
+      <ScheduleModal scheduleModal={scheduleModal} closeSendModal={closeSendModal}/>
+      
 
 
       <div className="mt-4">

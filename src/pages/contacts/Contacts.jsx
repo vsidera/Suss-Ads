@@ -8,6 +8,8 @@ import UploadIcon from '@mui/icons-material/Upload';
 import CreateModal from "../../components/modals/create_contact";
 import FileUpload from "../../components/file_upload/file_upload";
 import {useParams} from 'react-router-dom';
+import BroadcastModal from "../../components/modals/broadcast";
+import SendIcon from '@mui/icons-material/Send';
 
 const getMuiTheme = () =>
   createTheme({
@@ -111,6 +113,21 @@ const Contacts = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [createModal, setCreateModal] = useState(false);
   const [upload, setUpload] = useState(false);
+  const [broadcastModal, setBroadcastModal] = useState(false)
+  const [selectedMobileNos, setSelectedMobileNos] = useState([]);
+
+  const handleRowSelection = (currentRowsSelected, allRowsSelected) => {
+    console.log("LOG THE ROWS SELECTED!!!!!!!", allRowsSelected)
+    // const mobileNos = allRowsSelected.map((rowIndex) => {
+    //  
+    //   const rowData = contacts[rowIndex].mobile_no;
+    //   const mobileNo = rowData[2]; // assuming mobile_no is the third column
+    //   return mobileNo;
+    // });
+    // setSelectedMobileNos(mobileNos);
+  };
+
+  console.log("LOG THE ROWS SELECTED!!!!!!!", selectedMobileNos)
 
   const getContacts = () => {
     console.log("THIS GETS HERE!!!!!!!!");
@@ -134,6 +151,11 @@ const Contacts = () => {
     setCreateModal(false)
   }
 
+  const closeBroadcastModal = (e) => {
+    e.preventDefault();
+    setBroadcastModal(false)
+  }
+
   const closeUpload = (e) => {
     e.preventDefault();
     setUpload(false)
@@ -150,7 +172,7 @@ const Contacts = () => {
 
   const columns = [
     {
-      name: "id",
+      name: "attributes.FIRSTNAME",
       label: "First Name",
       options: {
         filter: true,
@@ -158,13 +180,14 @@ const Contacts = () => {
       },
     },
     {
-      name: "source",
+      name: "attributes.LASTNAME",
       label: "Last Name",
       options: {
         filter: true,
-        sort: false,
+        sort: true,
       },
     },
+
     {
       name: "mobile_no",
       label: "Mobile No",
@@ -180,6 +203,16 @@ const Contacts = () => {
         filter: true,
         sort: false,
       },
+      
+    },
+    {
+      name: "createdat",
+      label: "Created",
+      options: {
+        filter: true,
+        sort: false,
+      },
+      
     },
   ];
 
@@ -192,7 +225,6 @@ const Contacts = () => {
     fixedHeader: true,
     fontFamily: "Ubuntu",
     viewColumns: false,
-    selectableRows: "none",
     fixedSelectColumn: true,
     tableBodyHeight: "auto",
     enableNestedDataAccess: ".",
@@ -200,7 +232,14 @@ const Contacts = () => {
     elevation: 0,
     selectableRowsHeader: true,
     selectableRows: "multiple",
+    onRowsSelect: handleRowSelection,
     rowsPerPageOptions: [10, 20, 50],
+    columnWidths: ['20%', '20%', '20%', '20%', '20%'], 
+    setTableProps: () => ({ 
+      style: { 
+        tableLayout: 'auto',
+      },
+    }),
     downloadOptions: {
       separator: ",",
       filename: "Customers Summary.csv",
@@ -261,6 +300,7 @@ const Contacts = () => {
 
   return (
     <Sidebar>
+      <BroadcastModal broadcastModal={broadcastModal} closeBroadcastModal={closeBroadcastModal}/>
       <CreateModal createModal={createModal} closeCreateModal={closeCreateModal} app_id={app_id}/>
       <h1 className="text-2xl text-primary mb-6">Contacts</h1>
       <h4 className="text-md text-primary">A list of contacts for the client</h4>
@@ -281,9 +321,17 @@ const Contacts = () => {
           <UploadIcon />
           <p className="ml-4">Upload Contact</p>
         </button>
+        <button
+          type="button"
+          className="text-white w-42 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center ml-2"
+          onClick={() =>setBroadcastModal(true)}
+        >
+          <SendIcon />
+          <p className="ml-4">Broadcast</p>
+        </button>
       </div>
       {upload ? <div>
-      <FileUpload closeUpload={closeUpload}/>
+      <FileUpload closeUpload={closeUpload} app_id={app_id}/>
       </div> : <div></div>}
       
       <div className="mt-4">

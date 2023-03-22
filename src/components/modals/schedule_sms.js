@@ -4,8 +4,9 @@ import Modal from "@mui/material/Modal";
 import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
 import SnackbarAlert from "../utils/snackbar";
 import { sendSms } from "../../actions/messages/messagesAction"
+import MaterialUIPickers from "../utils/timePicker";
 
-const SendSmsModal = ({ smsModal, closeSendModal }) => {
+const ScheduleModal = ({ scheduleModal, closeSendModal }) => {
 
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
   const [eventType, setEventType] = useState('');
@@ -30,10 +31,10 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
     e.preventDefault();
 
     const newSms = {
-      destination: state.mobile_no,
-      content: state.message,
-      request_id: "123",
-      "scheduled":"2023-03-22T06:31:05"
+        destination: state.mobile_no,
+        content: state.message,
+        request_id: "123",
+        "scheduled":"2023-03-22T06:31:05"
     };
 
     const res = sendSms(newSms).then((res) => {
@@ -81,7 +82,7 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
         title={eventTitle}
       />
       <Modal
-        open={smsModal}
+        open={scheduleModal}
         sx={{ border: "none", boxShadow: "none" }}
         onClose={closeSendModal}
       >
@@ -89,7 +90,7 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
           <Box sx={style}>
             <CardContent style={{ width: "60%" }}>
               <div className="text-center content-center">
-                <p className="text-xl">SEND SMS</p>
+                <p className="text-xl">SEND SCHEDULED SMS</p>
 
                 <br />
 
@@ -122,6 +123,9 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
                       }}
                     />
                   </div>
+                  <div className="my-2">
+                    <MaterialUIPickers/>
+                  </div>
                   <button
                     className="bg-[#9B9DEE] text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
                     style={{ marginTop: "2rem", alignSelf: "center" }}
@@ -139,4 +143,4 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
   );
 };
 
-export default SendSmsModal;
+export default ScheduleModal;

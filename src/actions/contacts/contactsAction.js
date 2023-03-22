@@ -34,7 +34,7 @@ export function contactsAction(app_id) {
       });
   }
 
-  export function contactCreate(formValues) {
+export function contactCreate(formValues) {
     console.log("FORMVALUES ARE!!!!!!!!!!!!!",formValues)
     const contactCreateUrl = `${apiUrl.CREATE_CONTACT}/${formValues.app_id}/create`;
     const config = authHeaders();
@@ -67,12 +67,12 @@ export function contactsAction(app_id) {
       });
   }  
 
-  export function uploadContacts(formValues) {
-    const uploadContactsUrl = apiUrl.CREATE_CONTACTS;
+export function contactsUpload(formValues) {
+    const uploadContactsUrl = `${apiUrl.UPLOAD_CONTACTS}/${formValues.app_id}/upload`;
     const config = authHeaders();
   
     return axios
-      .post(uploadContactsUrl, config, formValues)
+      .post(uploadContactsUrl, formValues.selectedFile, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {
