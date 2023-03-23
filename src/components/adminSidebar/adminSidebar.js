@@ -83,7 +83,7 @@ export default function AdminSidebar({children}) {
                         <ul className="pt-2 pb-4 space-y-1 text-sm">
                             <li className="rounded-sm">
                                 <a
-                                    href={`/all-apps`}
+                                    href={`/apps/3/all-apps`}
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -108,7 +108,7 @@ export default function AdminSidebar({children}) {
                             </li>
                             <li className="rounded-sm">
                                 <a
-                                    href={`/all-services`}
+                                    href={`/apps/3/services`}
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -131,7 +131,7 @@ export default function AdminSidebar({children}) {
                             </li>
                             <li className="rounded-sm">
                                 <a
-                                    href={`/users`}
+                                    href={`/apps/3/users`}
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg

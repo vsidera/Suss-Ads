@@ -19,14 +19,14 @@ function App() {
         <Routes>
           <Route path='/login' exact element={<Login/>} />
           <Route path="/apps/:id" element={<Home/>} />
-          <Route path='users' element={<Users/>} />
-          <Route path='admin' element={<Admin/>} />
+          <Route path='apps/3' element={<Admin />} exact />
           <Route path='apps/:id/contacts' element={<Contacts/>} />
           <Route path='apps/:id/messages' element={<Messages/>} />
           <Route path='apps/:id/appservices' element={<AppServices/>} />
           <Route path='apps' element={<Applications/>} />
-          <Route path='all-apps' element={<AllApps/>} />
-          <Route path='all-services' element={<AllServices/>} />
+          <Route path='apps/:id/all-apps' element={<AllApps/>} />
+          <Route path='apps/:id/users' element={<Users/>} />
+          <Route path='apps/:id/services' element={<AllServices/>} />
         </Routes>
     
       </BrowserRouter>

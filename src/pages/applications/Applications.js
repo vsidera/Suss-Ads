@@ -41,14 +41,6 @@ const Applications = () => {
           className="flex flex-col justify-start items-center mt-6"
           style={{ width: "90vw" }}
         >
-          <Link
-            to="/admin"
-            className="bg-white rounded-lg shadow-md p-4 m-2 w-2/4 h-24 flex flex-col justify-center items-center"
-          >
-
-              <h2 className="text-xl font-bold">Admin</h2>
-
-          </Link>
           {apps.map((app, index) => (
             <Link
               to={`/apps/${app.code}`}

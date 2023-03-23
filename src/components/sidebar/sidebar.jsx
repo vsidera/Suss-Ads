@@ -17,6 +17,9 @@ export default function Sidebar({children}) {
         navigate("/login");
       };
 
+      console.log("ID IS!!!!!!!!!", id)
+   
+
     return (
         <div className="flex">
             <div
