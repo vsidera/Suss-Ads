@@ -3,9 +3,13 @@ import { Input, Button } from "@material-ui/core";
 import { contactsUpload } from "../../actions/contacts/contactsAction";
 import SnackbarAlert from "../utils/snackbar";
 import axios from 'axios';
+import { authHeaders } from '../../utils/headers/headers';
 
 const FileUpload = ({ closeUpload,app_id }) => {
   const [selectedFile, setSelectedFile] = useState(null);
+
+  const tokenKey = JSON.parse(localStorage.getItem('key'));
+  const authToken = `Token ${tokenKey}`;
 
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
   const [eventType, setEventType] = useState("");
@@ -20,26 +24,7 @@ const FileUpload = ({ closeUpload,app_id }) => {
   };
 
   const data = {"contacts": selectedFile}
-  
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  
-  //   const res = contactsUpload({data, app_id}).then((res) => {
-  //     if (res.status === 201) {
-  //       setEventType("success");
-  //       setEventMessage("Contacts Successfully Uploaded");
-  //       setEventTitle("CONTACTS UPLOAD");
-  //       setIsSnackBarAlertOpen(true);
-  //     } else {
-  //       setEventType("fail");
-  //       setEventMessage("Contacts NOT Uploaded");
-  //       setEventTitle("CONTACTS UPLOAD");
-  //       setIsSnackBarAlertOpen(true);
-  //     }
-  //   });
-  
-  //   return res;
-  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
   
@@ -47,7 +32,7 @@ const FileUpload = ({ closeUpload,app_id }) => {
       method: "post",
       url: "https://bulksms.kindmoss-804ac673.eastus.azurecontainerapps.io/api/v1/contact/3/upload",
       headers: {
-        Authorization: "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJTa2l6YSB0dW5lcyIsInN1YiI6IlZBUyBQYWFTIiwiZXhwIjoxNjc5NjA1MjE1LCJuYmYiOjE2Nzk2MDE2MTUsImlhdCI6MTY3OTYwMTYxNSwianRpIjoiMyJ9.5xpPOZKieuudK5FQeuivitGRmxlvSOhLXQLRvnjLsUI"
+        Authorization: authToken
       },
       data: selectedFile,
     };
