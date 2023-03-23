@@ -30,17 +30,15 @@ const Applications = () => {
 
   return (
     <>
-      <h1 className="text-2xl text-primary mb-6 flex justify-center">
-        Organisations
-      </h1>
-      <h4 className="text-md text-primary flex justify-center mb-6">
-        A list of Organisations for the user
-      </h4>
-      <div className="flex justify-center h-screen bg-gray-100 shadow-lg shadow-top rounded-lg mb-4 m-16">
+     
+      <div className="flex justify-center h-screen bg-gray-100 shadow-2xl shadow-top rounded-lg mb-4 m-16">
   <div
     className="flex flex-col justify-center items-center mt-6 mx-auto"
     style={{ width: "60vw" }}
   >
+     <h4 className="text-lg text-primary flex justify-center mb-6 font-serif">
+        Select an Organisation
+      </h4>
     {apps.map((app, index) => (
       <Link
         to={`/apps/${app.code}`}

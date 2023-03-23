@@ -173,10 +173,11 @@ const Contacts = () => {
   const columns = [
     {
       name: "attributes.FIRSTNAME",
-      label: "First Name",
+      label: "First name",
       options: {
         filter: true,
         sort: true,
+        setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
       },
     },
     {
@@ -185,6 +186,7 @@ const Contacts = () => {
       options: {
         filter: true,
         sort: true,
+        setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
       },
     },
 
@@ -194,6 +196,7 @@ const Contacts = () => {
       options: {
         filter: true,
         sort: false,
+        setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
       },
     },
     {
@@ -202,6 +205,7 @@ const Contacts = () => {
       options: {
         filter: true,
         sort: false,
+        setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
       },
       
     },
@@ -211,6 +215,7 @@ const Contacts = () => {
       options: {
         filter: true,
         sort: false,
+        setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0 } }),
       },
       
     },
@@ -302,12 +307,12 @@ const Contacts = () => {
     <Sidebar>
       <BroadcastModal broadcastModal={broadcastModal} closeBroadcastModal={closeBroadcastModal}/>
       <CreateModal createModal={createModal} closeCreateModal={closeCreateModal} app_id={app_id}/>
-      <h1 className="text-2xl text-primary mb-6">Contacts</h1>
-      <h4 className="text-md text-primary">A list of contacts for the client</h4>
+      <h1 className="text-2xl text-black mb-6">Contacts</h1>
+      <h4 className="text-md text-gray-800 font-serif">A list of contacts for the client</h4>
       <div className="flex justify-end">
         <button
           type="button"
-          className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+          className="text-white text-md text-thin font-light w-40 bg-gray-800 focus:ring-4 focus:outline-none rounded-lg px-2 py-2 mt-4 flex items-center mr-2"
           onClick={() =>setCreateModal(true)}
         >
           <AddIcon />
@@ -315,7 +320,7 @@ const Contacts = () => {
         </button>
         <button
           type="button"
-          className="text-white w-42 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center"
+          className="text-white w-42 bg-gray-800 focus:ring-4 focus:outline-none font-light text-thin text-md rounded-lg px-2 py-2 mt-4 flex items-center"
           onClick={() =>setUpload(true)}
         >
           <UploadIcon />
@@ -323,7 +328,7 @@ const Contacts = () => {
         </button>
         <button
           type="button"
-          className="text-white w-42 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center ml-2"
+          className="text-white w-42 bg-gray-800 focus:ring-4 focus:outline-none font-light text-thin rounded-lg text-md px-2 py-2 mt-4 flex items-center ml-2"
           onClick={() =>setBroadcastModal(true)}
         >
           <SendIcon />

@@ -68,11 +68,22 @@ export function contactCreate(formValues) {
   }  
 
 export function contactsUpload(formValues) {
+    console.log("FORMVALUES!!!!!!", formValues)
     const uploadContactsUrl = `${apiUrl.UPLOAD_CONTACTS}/${formValues.app_id}/upload`;
-    const config = authHeaders();
+    const selectedFile = formValues.data
+    // const config = authHeaders();
+
+    const config = {
+      method: "post",
+      url: uploadContactsUrl,
+      headers: {
+        Authorization: authHeaders(),
+        ...selectedFile.getHeaders(),
+      },
+      data: selectedFile,
+    };
   
-    return axios
-      .post(uploadContactsUrl, formValues.selectedFile, config)
+    return axios(config)
       .then((res) => {
       
         if (res.data && res.status === 200) {
