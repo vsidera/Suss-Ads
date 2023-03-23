@@ -11,6 +11,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import AttachServiceModal from "../../components/modals/attach_service";
 import AttachUserModal from "../../components/modals/attach_user";
+import {useParams} from 'react-router-dom';
 
 const getMuiTheme = () =>
   createTheme({
@@ -106,6 +107,11 @@ const getMuiTheme = () =>
   });
 
 const AllApps = () => {
+
+  const params = useParams();
+
+  const app_id = params.id
+
   const [apps, setApps] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -295,7 +301,7 @@ const AllApps = () => {
     <AdminSidebar>
     <CreateAppModal createAppModal={createAppModal} closeCreateAppModal={closeCreateAppModal}/>
     <AttachServiceModal attachServiceModal={attachServiceModal} closeAttachServiceModal={closeAttachServiceModal}/>
-    <AttachUserModal attachUserModal={attachUserModal} closeAttachUserModal={closeAttachUserModal}/>
+    <AttachUserModal attachUserModal={attachUserModal} closeAttachUserModal={closeAttachUserModal} app_id={3}/>
     <h1 className="text-2xl text-primary mb-6">All Organisations</h1>
     <h4 className="text-md text-primary">A list of all the Organisations </h4>
     <div className="flex justify-end">

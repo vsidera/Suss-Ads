@@ -1,37 +1,67 @@
 import React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
 import AsyncSelect from "react-select/async";
+import { userSearch } from "../../actions/login/loginAction";
 
 const AttachUserModal = ({
   attachUserModal,
   closeAttachUserModal,
+  app_id
 }) => {
-  const loadOptions = (inputValue, callback) => {
-    // Make an API call or perform some async operation to fetch the options
-    const options = [
-      { value: "email1@example.com", label: "email1@example.com" },
-      { value: "email2@example.com", label: "email2@example.com" },
-      { value: "vik@example.com", label: "vik@example.com" },
-    ];
 
-    // Call the callback function with the loaded options
-    setTimeout(() => {
-      callback(options);
-    }, 1000);
+  const [search, setSearch] = useState(null)
+
+  const loadOptions = (inputValue, callback) => {
+    userSearch({ app_id, search: inputValue })
+      .then((res) => {
+        if (res.errors) {
+          console.log("AN ERROR HAS OCCURED");
+          callback([], new Error("An error occurred"));
+        } else {
+          const options = res.data.map((user) => ({
+            value: user.id,
+            label: user.email,
+          }));
+  
+          if (options.length === 0) {
+            callback([], new Error("No results found"));
+          } else if (options.length === 1) {
+            callback(options, null);
+            setSelectedValue(options[0]);
+          } else {
+            // Multiple results found, return the first one as default value
+            callback(options, null);
+            setSelectedValue(options[0]);
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        callback([], new Error("An error occurred"));
+      });
   };
+  
+  
+  
 
   const [selectedValue, setSelectedValue] = useState(null);
-  const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (newValue) => {
-    setInputValue(newValue);
+    setSearch(newValue);
   };
 
   const handleSelectedChange = (newValue) => {
     setSelectedValue(newValue);
   };
+
+  useEffect(() => {
+  if (search){
+    loadOptions();
+  }
+    
+  }, [search]);
 
   const style = {
     position: "absolute",
@@ -57,7 +87,7 @@ const AttachUserModal = ({
       width: "100%",
     }),
   };
-  
+
 
   return (
     <>
@@ -77,7 +107,7 @@ const AttachUserModal = ({
                 <div className="w-full">
                   <AsyncSelect
                     value={selectedValue}
-                    inputValue={inputValue}
+                    inputValue={search}
                     onInputChange={handleInputChange}
                     onChange={handleSelectedChange}
                     loadOptions={loadOptions}

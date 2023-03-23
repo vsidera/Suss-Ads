@@ -5,8 +5,11 @@ import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
 import SnackbarAlert from "../utils/snackbar";
 import { sendSms } from "../../actions/messages/messagesAction"
 import MaterialUIPickers from "../utils/timePicker";
+import { v4 as uuidv4 } from 'uuid';
 
 const ScheduleModal = ({ scheduleModal, closeSendModal }) => {
+
+const randomUuid = uuidv4();
 
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
   const [eventType, setEventType] = useState('');
@@ -33,14 +36,14 @@ const ScheduleModal = ({ scheduleModal, closeSendModal }) => {
     const newSms = {
         destination: state.mobile_no,
         content: state.message,
-        request_id: "123",
+        requestid: randomUuid,
         "scheduled":"2023-03-22T06:31:05"
     };
 
     const res = sendSms(newSms).then((res) => {
-      if (res.status === 201) {
+      if (res.status === 202) {
         setEventType('success');
-        setEventMessage('Message Sent Successfully');
+        setEventMessage(res.data.status_desc);
         setEventTitle('MESSAGE SEND');
         setIsSnackBarAlertOpen(true);
       } else {

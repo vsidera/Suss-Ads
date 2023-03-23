@@ -17,4 +17,5 @@ export default {
     LIST_APPLICATIONS: `${REACT_APP_SUSS_URL}/api/v1/application/3/list`,
     LIST_SERVICES: `${REACT_APP_SUSS_URL}/api/v1/service/3/list`,
     USER_APPS: `${REACT_APP_SUSS_URL}/api/v1/users/application/list`,
+    USER_SEARCH: `${REACT_APP_SUSS_URL}api/v1/application`
 };

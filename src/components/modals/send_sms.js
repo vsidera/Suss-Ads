@@ -4,8 +4,12 @@ import Modal from "@mui/material/Modal";
 import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
 import SnackbarAlert from "../utils/snackbar";
 import { sendSms } from "../../actions/messages/messagesAction"
+import { v4 as uuidv4 } from 'uuid';
+
 
 const SendSmsModal = ({ smsModal, closeSendModal }) => {
+
+  const randomUuid = uuidv4();
 
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
   const [eventType, setEventType] = useState('');
@@ -13,8 +17,8 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
   const [eventTitle, setEventTitle] = useState('');
 
   const [state, setState] = React.useState({
-    mobile_no: '',
-    message: '',
+    destination: '',
+    content: '',
 
   });
 
@@ -30,9 +34,9 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
     e.preventDefault();
 
     const newSms = {
-      destination: state.mobile_no,
-      content: state.message,
-      request_id: "123",
+      destination: state.destination,
+      content: state.content,
+      requestid: randomUuid,
       "scheduled":"2023-03-22T06:31:05"
     };
 
@@ -97,11 +101,11 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
                   <div className="my-2">
                     <TextField
                       id="mobileNo"
-                      name="mobile_no"
+                      name="destination"
                       label="Mobile No"
                       variant="outlined"
                       type="number"
-                      value={state.mobile_no}
+                      value={state.destination}
                       onChange={handleChange}
                       fullWidth
                     />
@@ -109,6 +113,7 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
                   <div className="my-2">
                     <TextareaAutosize
                       id="content"
+                      name="content"
                       aria-label="empty textarea"
                       placeholder="Type your message here"
                       value={state.content}
