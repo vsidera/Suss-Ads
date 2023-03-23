@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
 import AsyncSelect from "react-select/async";
-import { userSearch } from "../../actions/login/loginAction";
+import { userSearch, userAttach } from "../../actions/login/loginAction";
+import SnackbarAlert from "../utils/snackbar";
 
 const AttachUserModal = ({
   attachUserModal,
@@ -11,7 +12,15 @@ const AttachUserModal = ({
   app_id
 }) => {
 
+  const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
+  const [eventType, setEventType] = useState('');
+  const [eventMessage, setEventMessage] = useState('');
+  const [eventTitle, setEventTitle] = useState('');
+  
+
   const [search, setSearch] = useState(null)
+
+  const [selectedValue, setSelectedValue] = useState(null);
 
   const loadOptions = (inputValue, callback) => {
     userSearch({ app_id, search: inputValue })
@@ -43,11 +52,8 @@ const AttachUserModal = ({
       });
   };
   
+  console.log("THE SELECTED VALUE IS!!!!!!!!", selectedValue)
   
-  
-
-  const [selectedValue, setSelectedValue] = useState(null);
-
   const handleInputChange = (newValue) => {
     setSearch(newValue);
   };
@@ -62,6 +68,30 @@ const AttachUserModal = ({
   }
     
   }, [search]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const user_id = {
+      user_id: selectedValue.user_id,
+    };
+
+    const res = userAttach(user_id).then((res) => {
+      if (res.status === 201) {
+        setEventType('success');
+        setEventMessage('User Successfully Attached');
+        setEventTitle('USER ATTACH');
+        setIsSnackBarAlertOpen(true);
+      } else {
+        setEventType('fail');
+        setEventMessage('User NOT Attached');
+        setEventTitle('USER ATTACH');
+        setIsSnackBarAlertOpen(true);
+      }
+    });
+
+    return res;
+  };
 
   const style = {
     position: "absolute",
@@ -91,6 +121,13 @@ const AttachUserModal = ({
 
   return (
     <>
+      <SnackbarAlert
+        open={isSnackBarAlertOpen}
+        type={eventType}
+        message={eventMessage}
+        handleClose={() => setIsSnackBarAlertOpen(false)}
+        title={eventTitle}
+      />
       <Modal
         open={attachUserModal}
         sx={{ border: "none", boxShadow: "none" }}
@@ -119,7 +156,7 @@ const AttachUserModal = ({
                   <button
                     className="bg-[#9B9DEE] text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
                     style={{ marginTop: "2rem", alignSelf: "center" }}
-                    // onClick={handleFormSubmit}
+                    onClick={handleSubmit}
                   >
                     ATTACH USER
                   </button>

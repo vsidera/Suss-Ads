@@ -98,12 +98,12 @@ export function servicesAction(app_id) {
       });
   }  
 
-  export function attachServiceAction(formValues) {
-    const attachServiceUrl = apiUrl.ATTACH_SERVICE_APP;
+  export function serviceAttach(formValues) {
+    const attachUrl = `${apiUrl.SERVICE_ATTACH}/${formValues.app_id}/service/${formValues.service_id}`;
     const config = authHeaders();
   
     return axios
-      .get(attachServiceUrl, config, formValues)
+      .post(attachUrl, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {
@@ -118,7 +118,7 @@ export function servicesAction(app_id) {
         
           return {
             errors: {
-              _error: 'The contacts could not be returned.',
+              _error: 'The user could not be created.',
             },
           };
         }   
@@ -130,12 +130,12 @@ export function servicesAction(app_id) {
       });
   }  
 
-  export function attachUserAction(formValues) {
-    const attachUserUrl = apiUrl.ATTACH_USER_APP;
+  export function serviceSearch(formValues) {
+    const searchUrl = `${apiUrl.SERVICE_SEARCH}/${formValues.app_id}/search?name=${formValues.search}`;
     const config = authHeaders();
   
     return axios
-      .get(attachUserUrl, config, formValues)
+      .get(searchUrl, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {
@@ -150,7 +150,7 @@ export function servicesAction(app_id) {
         
           return {
             errors: {
-              _error: 'The contacts could not be returned.',
+              _error: 'The user could not be created.',
             },
           };
         }   
@@ -161,3 +161,4 @@ export function servicesAction(app_id) {
         };
       });
   }  
+

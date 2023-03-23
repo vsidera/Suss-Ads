@@ -300,7 +300,7 @@ const AllApps = () => {
   return (
     <AdminSidebar>
     <CreateAppModal createAppModal={createAppModal} closeCreateAppModal={closeCreateAppModal}/>
-    <AttachServiceModal attachServiceModal={attachServiceModal} closeAttachServiceModal={closeAttachServiceModal}/>
+    <AttachServiceModal attachServiceModal={attachServiceModal} closeAttachServiceModal={closeAttachServiceModal} app_id={app_id}/>
     <AttachUserModal attachUserModal={attachUserModal} closeAttachUserModal={closeAttachUserModal} app_id={3}/>
     <h1 className="text-2xl text-primary mb-6">All Organisations</h1>
     <h4 className="text-md text-primary">A list of all the Organisations </h4>

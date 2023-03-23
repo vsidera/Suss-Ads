@@ -1,38 +1,94 @@
 import React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
 import AsyncSelect from "react-select/async";
+import { serviceAttach, serviceSearch } from "../../actions/services/servicesAction";
+import SnackbarAlert from "../utils/snackbar";
 
 const AttachServiceModal = ({
   attachServiceModal,
   closeAttachServiceModal,
+  app_id
 }) => {
-  const loadOptions = (inputValue, callback) => {
-    // Make an API call or perform some async operation to fetch the options
-    const options = [
-      { value: "email1@example.com", label: "email1@example.com" },
-      { value: "email2@example.com", label: "email2@example.com" },
-      { value: "vik@example.com", label: "vik@example.com" },
-    ];
+  const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
+  const [eventType, setEventType] = useState('');
+  const [eventMessage, setEventMessage] = useState('');
+  const [eventTitle, setEventTitle] = useState('');
+  
 
-    // Call the callback function with the loaded options
-    setTimeout(() => {
-      callback(options);
-    }, 1000);
-  };
+  const [search, setSearch] = useState(null)
 
   const [selectedValue, setSelectedValue] = useState(null);
-  const [inputValue, setInputValue] = useState("");
 
+  const loadOptions = (inputValue, callback) => {
+    serviceSearch({ app_id, search: inputValue })
+      .then((res) => {
+        if (res.errors) {
+          console.log("AN ERROR HAS OCCURED");
+          callback([], new Error("An error occurred"));
+        } else {
+          const options = res.data.map((service) => ({
+            value: service.id,
+            label: service.name,
+          }));
+  
+          if (options.length === 0) {
+            callback([], new Error("No results found"));
+          } else if (options.length === 1) {
+            callback(options, null);
+            setSelectedValue(options[0]);
+          } else {
+            // Multiple results found, return the first one as default value
+            callback(options, null);
+            setSelectedValue(options[0]);
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        callback([], new Error("An error occurred"));
+      });
+  };
+  
+  console.log("THE SELECTED VALUE IS!!!!!!!!", selectedValue)
+  
   const handleInputChange = (newValue) => {
-    setInputValue(newValue);
+    setSearch(newValue);
   };
 
   const handleSelectedChange = (newValue) => {
     setSelectedValue(newValue);
   };
 
+  useEffect(() => {
+  if (search){
+    loadOptions();
+  }
+    
+  }, [search]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const service_id = selectedValue.service_id
+
+    const res = serviceAttach({service_id,app_id}).then((res) => {
+      if (res.status === 201) {
+        setEventType('success');
+        setEventMessage('Service Successfully Attached');
+        setEventTitle('SERVICE ATTACH');
+        setIsSnackBarAlertOpen(true);
+      } else {
+        setEventType('fail');
+        setEventMessage('Service NOT Attached');
+        setEventTitle('SERVICE ATTACH');
+        setIsSnackBarAlertOpen(true);
+      }
+    });
+
+    return res;
+  };
   const style = {
     position: "absolute",
     top: "40%",
@@ -61,6 +117,13 @@ const AttachServiceModal = ({
 
   return (
     <>
+    <SnackbarAlert
+        open={isSnackBarAlertOpen}
+        type={eventType}
+        message={eventMessage}
+        handleClose={() => setIsSnackBarAlertOpen(false)}
+        title={eventTitle}
+      />
       <Modal
         open={attachServiceModal}
         sx={{ border: "none", boxShadow: "none" }}
@@ -77,7 +140,7 @@ const AttachServiceModal = ({
                 <div className="w-full">
                   <AsyncSelect
                     value={selectedValue}
-                    inputValue={inputValue}
+                    inputValue={search}
                     onInputChange={handleInputChange}
                     onChange={handleSelectedChange}
                     loadOptions={loadOptions}
@@ -89,7 +152,7 @@ const AttachServiceModal = ({
                   <button
                     className="bg-[#9B9DEE] text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
                     style={{ marginTop: "2rem", alignSelf: "center" }}
-                    // onClick={handleFormSubmit}
+                    onClick={handleSubmit}
                   >
                     ATTACH
                   </button>

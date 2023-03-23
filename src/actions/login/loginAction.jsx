@@ -66,6 +66,38 @@ export function loginAction(formValues) {
       });
   }  
 
+  export function userAttach(formValues) {
+    const attachUrl = `${apiUrl.USER_ATTACH}/${formValues.app_id}/user/add`;
+    const config = authHeaders();
+  
+    return axios
+      .put(attachUrl, formValues.user_id, config)
+      .then((res) => {
+      
+        if (res.data && res.status === 200) {
+
+            console.log("THE RESPONSE IS !!!!!!!",res)
+          
+        }
+        return res;
+      })
+      .catch((error) => {
+        if (error.response) {
+        
+          return {
+            errors: {
+              _error: 'The user could not be created.',
+            },
+          };
+        }   
+        return {
+          errors: {
+            _error: 'Network error. Please try again.',
+          },
+        };
+      });
+  }  
+
   export function userSearch(formValues) {
     const searchUrl = `${apiUrl.USER_SEARCH}/${formValues.app_id}/user/search?email=${formValues.search}`;
     const config = authHeaders();
