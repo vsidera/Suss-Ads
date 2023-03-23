@@ -37,21 +37,23 @@ const Applications = () => {
         A list of Organisations for the user
       </h4>
       <div className="flex justify-center h-screen bg-gray-100 shadow-lg shadow-top rounded-lg mb-4 m-16">
-        <div
-          className="flex flex-col justify-start items-center mt-6"
-          style={{ width: "90vw" }}
-        >
-          {apps.map((app, index) => (
-            <Link
-              to={`/apps/${app.code}`}
-              key={index}
-              className="bg-white rounded-lg shadow-md p-4 m-2 w-2/4 h-24 flex flex-col justify-center items-center"
-            >
-              <AppsCard key={index} {...app} />
-            </Link>
-          ))}
-        </div>
-      </div>
+  <div
+    className="flex flex-col justify-center items-center mt-6 mx-auto"
+    style={{ width: "60vw" }}
+  >
+    {apps.map((app, index) => (
+      <Link
+        to={`/apps/${app.code}`}
+        key={index}
+        className="bg-white rounded-lg shadow-md p-4 m-2 w-2/4 h-24 flex flex-col justify-center items-center"
+      >
+        <AppsCard key={index} {...app} />
+      </Link>
+    ))}
+  </div>
+</div>
+
+
     </>
   );
 };

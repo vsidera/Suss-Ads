@@ -18,11 +18,11 @@ function AppsCard({ name, email, createdat }) {
   const classes = useStyles();
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 m-2 w-2/4 h-24 flex flex-col justify-center items-center">
+
+      <div>
       <h2 className="text-xl">{name}</h2>
-      <p className="text-gray-600">{email}</p>
-      {/* <p className="text-gray-600">{createdat}</p> */}
-    </div>
+      </div>
+
   );
 }
 

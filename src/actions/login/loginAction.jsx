@@ -14,6 +14,7 @@ export function loginAction(formValues) {
         if (res.data && res.status === 200) {
           
           localStorage.setItem('key', JSON.stringify(res.data.token));
+          localStorage.setItem('loginTime', new Date().getTime());
         }
         return res;
       })
@@ -129,3 +130,5 @@ export function loginAction(formValues) {
         };
       });
   }  
+
+
