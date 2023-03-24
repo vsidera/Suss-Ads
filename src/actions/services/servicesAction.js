@@ -103,7 +103,7 @@ export function servicesAction(app_id) {
     const config = authHeaders();
   
     return axios
-      .post(attachUrl, config)
+      .post(attachUrl, formValues, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {

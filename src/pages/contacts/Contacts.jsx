@@ -12,9 +12,64 @@ import BroadcastModal from "../../components/modals/broadcast";
 import SendIcon from '@mui/icons-material/Send';
 
 const getMuiTheme = () =>
-  createTheme(
-  
-  );
+  createTheme({
+    components: {
+      MuiTableCell: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "#FFFFFF",
+            fontFamily: "Ubuntu",
+            fontWeight: "inherit",
+          },
+          footer: {
+            border: 0,
+          },
+        },
+      },
+
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            // fontFamily: 'Ubuntu',
+            color: "black",
+            justifyContent: "center",
+            // fontWeight: 'bold',
+          },
+        },
+      },
+
+      MUIDataTableSelectCell: {
+        styleOverrides: {
+          headerCell: {
+            backgroundColor: "#5f6062",
+            color: "wh",
+          },
+        },
+      },
+
+      MUIDataTable: {
+        styleOverrides: {
+          responsiveBase: {
+            position: "relative",
+            height: "auto",
+            borderRadius: "18px",
+            border: "1px solid #f2f2f2",
+            boxShadow: "0 0 6px 4px #efefef",
+          },
+        },
+      },
+      MUIDataTablePagination: {
+        styleOverrides: {
+          navContainer: {
+            border: 0,
+            boxShadow: "0 ",
+          },
+        },
+      },
+     
+    },
+  });
+
 
 const Contacts = () => {
   const params = useParams();
@@ -88,7 +143,7 @@ const Contacts = () => {
       options: {
         filter: true,
         sort: true,
-        setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
+        // setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
       },
     },
     {
@@ -97,7 +152,7 @@ const Contacts = () => {
       options: {
         filter: true,
         sort: true,
-        setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
+        // setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
       },
     },
 
@@ -107,7 +162,7 @@ const Contacts = () => {
       options: {
         filter: true,
         sort: false,
-        setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
+        // setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
       },
     },
     {
@@ -116,7 +171,7 @@ const Contacts = () => {
       options: {
         filter: true,
         sort: false,
-        setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
+        // setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
       },
       
     },
@@ -126,7 +181,7 @@ const Contacts = () => {
       options: {
         filter: true,
         sort: false,
-        setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0 } }),
+        // setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0 } }),
       },
       
     },

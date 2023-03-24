@@ -14,10 +14,63 @@ import AttachUserModal from "../../components/modals/attach_user";
 import {useParams} from 'react-router-dom';
 
 const getMuiTheme = () =>
-  createTheme(
-  
-  );
+  createTheme({
+    components: {
+      MuiTableCell: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "#FFFFFF",
+            fontFamily: "Ubuntu",
+            fontWeight: "inherit",
+          },
+          footer: {
+            border: 0,
+          },
+        },
+      },
 
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            // fontFamily: 'Ubuntu',
+            color: "black",
+            justifyContent: "center",
+            // fontWeight: 'bold',
+          },
+        },
+      },
+
+      MUIDataTableSelectCell: {
+        styleOverrides: {
+          headerCell: {
+            backgroundColor: "#5f6062",
+            color: "wh",
+          },
+        },
+      },
+
+      MUIDataTable: {
+        styleOverrides: {
+          responsiveBase: {
+            position: "relative",
+            height: "auto",
+            borderRadius: "18px",
+            border: "1px solid #f2f2f2",
+            boxShadow: "0 0 6px 4px #efefef",
+          },
+        },
+      },
+      MUIDataTablePagination: {
+        styleOverrides: {
+          navContainer: {
+            border: 0,
+            boxShadow: "0 ",
+          },
+        },
+      },
+     
+    },
+  });
 const AllApps = () => {
 
   const params = useParams();

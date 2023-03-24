@@ -30,8 +30,8 @@ const AttachServiceModal = ({
           callback([], new Error("An error occurred"));
         } else {
           const options = res.data.map((service) => ({
-            value: service.id,
-            label: service.name,
+            value: service.ID,
+            label: service.sender,
           }));
   
           if (options.length === 0) {
@@ -52,7 +52,6 @@ const AttachServiceModal = ({
       });
   };
   
-  console.log("THE SELECTED VALUE IS!!!!!!!!", selectedValue)
   
   const handleInputChange = (newValue) => {
     setSearch(newValue);
@@ -72,10 +71,10 @@ const AttachServiceModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const service_id = selectedValue.service_id
+    const service_id = selectedValue.value
 
     const res = serviceAttach({service_id,app_id}).then((res) => {
-      if (res.status === 201) {
+      if (res.status === 200) {
         setEventType('success');
         setEventMessage('Service Successfully Attached');
         setEventTitle('SERVICE ATTACH');
