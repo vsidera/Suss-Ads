@@ -68,11 +68,12 @@ export function loginAction(formValues) {
   }  
 
   export function userAttach(formValues) {
+    console.log("FORMVALUES ARE!!!!!!", formValues)
     const attachUrl = `${apiUrl.USER_ATTACH}/${formValues.app_id}/user/add`;
     const config = authHeaders();
   
     return axios
-      .put(attachUrl, formValues.user_id, config)
+      .put(attachUrl, formValues.data, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {

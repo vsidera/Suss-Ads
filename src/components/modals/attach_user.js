@@ -9,8 +9,11 @@ import SnackbarAlert from "../utils/snackbar";
 const AttachUserModal = ({
   attachUserModal,
   closeAttachUserModal,
-  app_id
+  app_id,
+  appId
 }) => {
+
+  console.log("THE APPLICATION ID IS!!!!!!!!", appId)
 
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
   const [eventType, setEventType] = useState('');
@@ -52,7 +55,7 @@ const AttachUserModal = ({
       });
   };
   
-  console.log("THE SELECTED VALUE IS!!!!!!!!", selectedValue)
+  
   
   const handleInputChange = (newValue) => {
     setSearch(newValue);
@@ -72,11 +75,14 @@ const AttachUserModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const user_id = {
-      user_id: selectedValue.user_id,
+    const data = {
+      user_id: selectedValue.value,
+      application_id: appId
     };
 
-    const res = userAttach(user_id).then((res) => {
+    console.log("DATA IS!!!!!!!!!!!",data)
+
+    const res = userAttach({data, app_id}).then((res) => {
       if (res.status === 201) {
         setEventType('success');
         setEventMessage('User Successfully Attached');

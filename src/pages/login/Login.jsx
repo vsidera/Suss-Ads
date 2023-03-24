@@ -187,7 +187,7 @@ const Login = () => {
                   setIsButtonClicked(true);
                 }}       
               >
-                Sign in
+                {isButtonClicked ? "Done!" : "Sign In"}
               </button>
               <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}

@@ -30,6 +30,7 @@ const AllApps = () => {
   const [createAppModal, setCreateAppModal] = useState(false);
   const [attachServiceModal, setAttachServiceModal] = useState(false);
   const [attachUserModal, setAttachUserModal] = useState(false);
+  const [appId, setAppId] = useState(null)
 
   const closeCreateAppModal = (e) => {
     e.preventDefault();
@@ -50,9 +51,13 @@ const AllApps = () => {
     setAttachServiceModal(true)
   }
 
-  const handleClick1 = () => {
+  const handleClick1 = (code) => {
+   
+    setAppId(code)
     setAttachUserModal(true)
   }
+
+  console.log("THE SET APP ID VALUE IS!!!!!!!!", appId)
 
 
   const getApps = () => {
@@ -75,6 +80,7 @@ const AllApps = () => {
   }, [createAppModal]);
 
   const columns = [
+   
     {
      name: "name",
      label: "Name",
@@ -108,6 +114,14 @@ const AllApps = () => {
      }
     },
     {
+      name: "code",
+      label: "Code",
+      options: {
+       filter: true,
+       sort: true,
+      }
+     },
+    {
       name: "",
       label: "Attach",
       options: {
@@ -129,8 +143,9 @@ const AllApps = () => {
        filter: true,
        sort: false,
        customBodyRender: (tableMeta, dataIndex, rowIndex) => {
+        
         return (
-          <button onClick={handleClick1}>
+          <button onClick={() => handleClick1(dataIndex.rowData[4])}>
           <PersonAddIcon />
           </button>
         );
@@ -212,8 +227,8 @@ const AllApps = () => {
   return (
     <AdminSidebar>
     <CreateAppModal createAppModal={createAppModal} closeCreateAppModal={closeCreateAppModal}/>
-    <AttachServiceModal attachServiceModal={attachServiceModal} closeAttachServiceModal={closeAttachServiceModal} app_id={app_id}/>
-    <AttachUserModal attachUserModal={attachUserModal} closeAttachUserModal={closeAttachUserModal} app_id={app_id}/>
+    <AttachServiceModal attachServiceModal={attachServiceModal} closeAttachServiceModal={closeAttachServiceModal} app_id={app_id} appId={appId}/>
+    <AttachUserModal attachUserModal={attachUserModal} closeAttachUserModal={closeAttachUserModal} app_id={app_id} appId={appId}/>
     <h1 className="text-2xl text-primary mb-6">All Organisations</h1>
     <h4 className="text-md text-primary">A list of all the Organisations </h4>
     <div className="flex justify-end">

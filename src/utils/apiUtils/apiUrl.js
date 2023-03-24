@@ -9,7 +9,7 @@ export default {
     UPLOAD_CONTACTS: `${REACT_APP_SUSS_URL}api/v1/contact`,
     LIST_MESSAGES: `${REACT_APP_SUSS_URL}/api/v1/message`,
     LIST_APP_SERVICES: `${REACT_APP_SUSS_URL}/api/v1/application`,
-    USER_ATTACH: `${REACT_APP_SUSS_URL}/api/v1/application`,
+    USER_ATTACH: `${REACT_APP_SUSS_URL}api/v1/application`,
     SERVICE_ATTACH: `${REACT_APP_SUSS_URL}/api/v1/application`,
     ATTACH_SERVICE_APP: `${REACT_APP_SUSS_URL}/api/v1/application/:app_id/service/:service_id`,
     CREATE_SERVICE: `${REACT_APP_SUSS_URL}/api/v1/service/create`,
