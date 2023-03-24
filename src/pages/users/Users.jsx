@@ -120,7 +120,7 @@ const Users = () => {
      label: "Name",
      options: {
       filter: true,
-      sort: true,
+      sort: false,
      }
     },
     {
@@ -222,12 +222,12 @@ const Users = () => {
   return (
     <AdminSidebar>
     <RegisterUserModal registerModal={registerModal} closeRegisterModal={closeRegisterModal}/>
-    <h1 className="text-2xl text-primary mb-6">All Users</h1>
-    <h4 className="text-md text-primary">A list of all the users </h4>
+    <h1 className="text-2xl text-black mb-6">All Users</h1>
+    <h4 className="text-md text-gray-800 font-serif">A list of all the users </h4>
     <div className="flex justify-end">
         <button
           type="button"
-          className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+          className="text-white w-36 bg-blue-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
           onClick={() =>setRegisterModal(true)}
         >
           <PersonAddAlt1Icon />

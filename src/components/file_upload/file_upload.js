@@ -73,7 +73,7 @@ const FileUpload = ({ closeUpload,app_id }) => {
         <form
           className="bg-gray-100 p-6 rounded-lg shadow-xl w-full mx-auto"
         >
-          <div className="cursor-pointer" onClick={closeUpload}>
+          <div className="cursor-pointer text-blue-900 text-xl" onClick={closeUpload}>
             X
           </div>
           <div className="mb-4 font-bold text-lg text-center font-serif text-blue-800">
@@ -94,7 +94,7 @@ const FileUpload = ({ closeUpload,app_id }) => {
             </label>
           </div>
           <button
-            className="bg-[#9B9DEE] text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
+            className="bg-blue-900 text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
             style={{ marginTop: "2rem", alignSelf: "center" }}
             onClick={handleSubmit}
           >

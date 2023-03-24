@@ -98,7 +98,7 @@ const AppServices = () => {
       label: "Name",
       options: {
         filter: true,
-        sort: true,
+        sort: false,
       },
     },
     {
@@ -203,8 +203,8 @@ const AppServices = () => {
 
   return (
     <Sidebar>
-      <h1 className="text-2xl text-primary mb-6">App Services</h1>
-      <h4 className="text-md text-primary">A list of Application Services</h4>
+      <h1 className="text-2xl text-black mb-6">App Services</h1>
+      <h4 className="text-md text-gray-800 font-serif">A list of Application Services</h4>
 
       
       <div className="mt-4">

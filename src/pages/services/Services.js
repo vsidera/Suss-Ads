@@ -102,7 +102,7 @@ const AllServices = () => {
      label: "Sender",
      options: {
       filter: true,
-      sort: true,
+      sort: false,
      }
     },
     {
@@ -145,6 +145,7 @@ const AllServices = () => {
     tableBodyHeight: 'auto',
     enableNestedDataAccess: '.',
     elevation: 0,
+    serverSide: true,
     count: 30,
     rowsPerPageOptions: [10, 20, 50],
     downloadOptions: {
@@ -204,12 +205,12 @@ const AllServices = () => {
   return (
     <AdminSidebar>
     <CreateServiceModal createServiceModal={createServiceModal} closeCreateServiceModal={closeCreateServiceModal}/>
-    <h1 className="text-2xl text-primary mb-6">All Services</h1>
-    <h4 className="text-md text-primary">A list of all the services </h4>
+    <h1 className="text-2xl text-black mb-6">All Services</h1>
+    <h4 className="text-md text-gray-800 font-serif">A list of all the services </h4>
     <div className="flex justify-end">
         <button
           type="button"
-          className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+          className="text-white w-36 bg-blue-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
           onClick={() =>setCreateServiceModal(true)}
         >
           <LibraryAddIcon />

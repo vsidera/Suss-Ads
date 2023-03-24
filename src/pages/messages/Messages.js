@@ -114,7 +114,7 @@ const Messages = () => {
      label: "Name",
      options: {
       filter: true,
-      sort: true,
+      sort: false,
      }
     },
     {
@@ -159,6 +159,7 @@ const Messages = () => {
     elevation: 0,
     count: 30,
     rowsPerPageOptions: [10, 20, 50],
+    serverSide: true,
     downloadOptions: {
       separator: ',',
       filename: 'Customers Summary.csv',
@@ -216,13 +217,13 @@ const Messages = () => {
 
     return (
       <Sidebar>
-      <h1 className="text-2xl text-primary mb-6">Messages</h1>
-      <h4 className="text-md text-primary">A list of messages sent to the client</h4>
+      <h1 className="text-2xl text-black mb-6">Messages</h1>
+      <h4 className="text-md text-gray-800 font-serif">A list of messages sent to the client</h4>
       <div className="flex justify-end">
         
       <button
           type="button"
-          className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+          className="text-white w-36 bg-blue-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
           onClick={() =>setSmsModal(true)}
         >
           <SendToMobileIcon />
@@ -230,7 +231,7 @@ const Messages = () => {
         </button>
         <button
           type="button"
-          className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+          className="text-white w-36 bg-blue-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
           onClick={() =>setScheduleModal(true)}
         >
           <ScheduleSendIcon />

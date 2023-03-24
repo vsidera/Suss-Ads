@@ -139,7 +139,7 @@ const AllApps = () => {
      label: "Name",
      options: {
       filter: true,
-      sort: true,
+      sort: false,
      }
     },
     {
@@ -171,12 +171,12 @@ const AllApps = () => {
       label: "Code",
       options: {
        filter: true,
-       sort: true,
+       sort: false,
       }
      },
     {
       name: "",
-      label: "Attach",
+      label: "Attach Service",
       options: {
        filter: true,
        sort: false,
@@ -191,7 +191,7 @@ const AllApps = () => {
      },
      {
       name: "",
-      label: "Attach",
+      label: "Attach User",
       options: {
        filter: true,
        sort: false,
@@ -220,6 +220,7 @@ const AllApps = () => {
     fixedSelectColumn: true,
     tableBodyHeight: 'auto',
     enableNestedDataAccess: '.',
+    serverSide:true,
     elevation: 0,
     count: 30,
     rowsPerPageOptions: [10, 20, 50],
@@ -282,12 +283,12 @@ const AllApps = () => {
     <CreateAppModal createAppModal={createAppModal} closeCreateAppModal={closeCreateAppModal}/>
     <AttachServiceModal attachServiceModal={attachServiceModal} closeAttachServiceModal={closeAttachServiceModal} app_id={app_id} appId={appId}/>
     <AttachUserModal attachUserModal={attachUserModal} closeAttachUserModal={closeAttachUserModal} app_id={app_id} appId={appId}/>
-    <h1 className="text-2xl text-primary mb-6">All Organisations</h1>
-    <h4 className="text-md text-primary">A list of all the Organisations </h4>
+    <h1 className="text-2xl text-black mb-6">All Organisations</h1>
+    <h4 className="text-md text-gray-800 font-serif">A list of all the Organisations </h4>
     <div className="flex justify-end">
         <button
           type="button"
-          className="text-white w-36 bg-[#5F6062] focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
+          className="text-white w-36 bg-blue-900 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2 mt-4 flex items-center mr-2"
           onClick={() =>setCreateAppModal(true)}
         >
           <AddBusinessIcon />

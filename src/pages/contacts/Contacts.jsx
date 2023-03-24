@@ -143,7 +143,7 @@ const Contacts = () => {
       label: "First name",
       options: {
         filter: true,
-        sort: true,
+        sort: false,
         // setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
       },
     },
@@ -152,7 +152,7 @@ const Contacts = () => {
       label: "Last Name",
       options: {
         filter: true,
-        sort: true,
+        sort: false,
         // setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: '#1F2937', color: 'white', fontSize: '0.9rem', lineHeight: 2.0} }),
       },
     },
@@ -200,6 +200,7 @@ const Contacts = () => {
     fixedSelectColumn: true,
     tableBodyHeight: "auto",
     enableNestedDataAccess: ".",
+    serverSide:true,
     count: 30,
     elevation: 0,
     selectableRowsHeader: true,
@@ -287,7 +288,7 @@ const Contacts = () => {
       <div className="flex justify-end">
         <button
           type="button"
-          className="text-white text-md text-thin font-light w-40 bg-gray-800 focus:ring-4 focus:outline-none rounded-lg px-2 py-2 mt-4 flex items-center mr-2"
+          className="text-white text-md text-thin font-light w-40 bg-blue-900 focus:ring-4 focus:outline-none rounded-lg px-2 py-2 mt-4 flex items-center mr-2"
           onClick={() =>setCreateModal(true)}
         >
           <AddIcon />
@@ -295,7 +296,7 @@ const Contacts = () => {
         </button>
         <button
           type="button"
-          className="text-white w-42 bg-gray-800 focus:ring-4 focus:outline-none font-light text-thin text-md rounded-lg px-2 py-2 mt-4 flex items-center"
+          className="text-white w-42 bg-blue-900 focus:ring-4 focus:outline-none font-light text-thin text-md rounded-lg px-2 py-2 mt-4 flex items-center"
           onClick={() =>setUpload(true)}
         >
           <UploadIcon />
@@ -303,7 +304,7 @@ const Contacts = () => {
         </button>
         <button
           type="button"
-          className="text-white w-42 bg-gray-800 focus:ring-4 focus:outline-none font-light text-thin rounded-lg text-md px-2 py-2 mt-4 flex items-center ml-2"
+          className="text-white w-42 bg-blue-900 focus:ring-4 focus:outline-none font-light text-thin rounded-lg text-md px-2 py-2 mt-4 flex items-center ml-2"
           onClick={handleBroadcast}
         >
           <SendIcon />
