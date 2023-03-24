@@ -18,7 +18,7 @@ export default function AdminSidebar({children}) {
         navigate("/login");
       };
 
-    console.log("ID IS!!!!!!!!!", id)
+      const logoUrl = `${process.env.PUBLIC_URL}/images/logo.png`;
 
     return (
         <div className="flex">
@@ -28,14 +28,15 @@ export default function AdminSidebar({children}) {
                 } flex flex-col h-screen p-3 bg-gray-800 shadow duration-300`}
             >
                 <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-xl font-bold text-white">
-                            SUSS SMS
-                        </h2>
+                <div className="flex items-center justify-between">
+                        <div className="mr-2">
+                        <img src={logoUrl} alt="Logo" />
+                        </div>
+                   
                         <button onClick={() => setOpen(!open)}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="w-6 h-6 text-gray-300 stroke-width-1"
+                                className="w-6 h-6 text-white"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -48,35 +49,6 @@ export default function AdminSidebar({children}) {
                                 />
                             </svg>
                         </button>
-                    </div>
-                    <div className="relative">
-                        <span className="absolute inset-y-0 left-0 flex items-center py-4">
-                            <button
-                                type="submit"
-                                className="p-2 focus:outline-none focus:ring"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-6 h-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth={2}
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                    />
-                                </svg>
-                            </button>
-                        </span>
-                        <input
-                            type="search"
-                            name="Search"
-                            placeholder="Search..."
-                            className="w-full py-2 pl-10 text-sm rounded-md focus:outline-none"
-                        />
                     </div>
 
                     <div className="flex-1">

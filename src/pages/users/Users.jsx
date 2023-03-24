@@ -117,7 +117,7 @@ const Users = () => {
   const columns = [
     {
      name: "name",
-     label: "Name",
+     label: "NAME",
      options: {
       filter: true,
       sort: false,
@@ -125,7 +125,7 @@ const Users = () => {
     },
     {
      name: "email",
-     label: "Email",
+     label: "EMAIL",
      options: {
       filter: true,
       sort: false,
@@ -133,7 +133,7 @@ const Users = () => {
     },
     {
      name: "phone",
-     label: "Phone",
+     label: "PHONE",
      options: {
       filter: true,
       sort: false,
@@ -141,7 +141,7 @@ const Users = () => {
     },
     {
      name: "company",
-     label: "Company",
+     label: "COMPANY",
      options: {
       filter: true,
       sort: false,

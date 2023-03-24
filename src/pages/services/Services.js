@@ -99,34 +99,38 @@ const AllServices = () => {
   const columns = [
     {
      name: "sender",
-     label: "Sender",
+     label: "SENDER",
      options: {
       filter: true,
       sort: false,
+      setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: 'white', color: 'black', fontSize: '0.9rem', lineHeight: 2.0} }),
      }
     },
     {
      name: "provider",
-     label: "Provider",
+     label: "PROVIDER",
      options: {
       filter: true,
       sort: false,
+      setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: 'white', color: 'black', fontSize: '0.9rem', lineHeight: 2.0} }),
      }
     },
     {
      name: "status",
-     label: "Status",
+     label: "STATUS",
      options: {
       filter: true,
       sort: false,
+      setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: 'white', color: 'black', fontSize: '0.9rem', lineHeight: 2.0} }),
      }
     },
     {
      name: "country_code",
-     label: "Country",
+     label: "COUNTRY",
      options: {
       filter: true,
       sort: false,
+      setCellHeaderProps: () => ({ style: { minWidth: "180px", maxWidth: "180px", backgroundColor: 'white', color: 'black', fontSize: '0.9rem', lineHeight: 2.0} }),
      }
     },
    ];

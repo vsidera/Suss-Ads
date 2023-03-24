@@ -111,7 +111,7 @@ const Messages = () => {
   const columns = [
     {
      name: "id",
-     label: "Name",
+     label: "NAME",
      options: {
       filter: true,
       sort: false,
@@ -119,7 +119,7 @@ const Messages = () => {
     },
     {
      name: "source",
-     label: "Company",
+     label: "COMPANY",
      options: {
       filter: true,
       sort: false,
@@ -127,7 +127,7 @@ const Messages = () => {
     },
     {
      name: "direction",
-     label: "City",
+     label: "CITY",
      options: {
       filter: true,
       sort: false,
@@ -135,7 +135,7 @@ const Messages = () => {
     },
     {
      name: "status_desc",
-     label: "State",
+     label: "STATE",
      options: {
       filter: true,
       sort: false,

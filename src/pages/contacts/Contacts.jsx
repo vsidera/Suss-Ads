@@ -140,7 +140,7 @@ const Contacts = () => {
   const columns = [
     {
       name: "attributes.FIRSTNAME",
-      label: "First name",
+      label: "FIRST NAME",
       options: {
         filter: true,
         sort: false,
@@ -149,7 +149,7 @@ const Contacts = () => {
     },
     {
       name: "attributes.LASTNAME",
-      label: "Last Name",
+      label: "LAST NAME",
       options: {
         filter: true,
         sort: false,
@@ -159,7 +159,7 @@ const Contacts = () => {
 
     {
       name: "mobile_no",
-      label: "Mobile No",
+      label: "MOBILE NO",
       options: {
         filter: true,
         sort: false,
@@ -168,7 +168,7 @@ const Contacts = () => {
     },
     {
       name: "status_code",
-      label: "Status",
+      label: "STATUS",
       options: {
         filter: true,
         sort: false,
@@ -178,7 +178,7 @@ const Contacts = () => {
     },
     {
       name: "createdat",
-      label: "Created",
+      label: "CREATED",
       options: {
         filter: true,
         sort: false,

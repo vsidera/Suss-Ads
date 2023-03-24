@@ -17,7 +17,6 @@ export default function Sidebar({children}) {
         navigate("/login");
       };
 
-      console.log("ID IS!!!!!!!!!", id)
       const logoUrl = `${process.env.PUBLIC_URL}/images/logo.png`;
 
     return (

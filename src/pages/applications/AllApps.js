@@ -136,7 +136,7 @@ const AllApps = () => {
    
     {
      name: "name",
-     label: "Name",
+     label: "NAME",
      options: {
       filter: true,
       sort: false,
@@ -144,7 +144,7 @@ const AllApps = () => {
     },
     {
      name: "email",
-     label: "Email",
+     label: "EMAIL",
      options: {
       filter: true,
       sort: false,
@@ -152,7 +152,7 @@ const AllApps = () => {
     },
     {
      name: "status_code",
-     label: "Status",
+     label: "STATUS",
      options: {
       filter: true,
       sort: false,
@@ -160,7 +160,7 @@ const AllApps = () => {
     },
     {
      name: "country_code",
-     label: "Country",
+     label: "COUNTRY",
      options: {
       filter: true,
       sort: false,
@@ -168,7 +168,7 @@ const AllApps = () => {
     },
     {
       name: "code",
-      label: "Code",
+      label: "CODE",
       options: {
        filter: true,
        sort: false,
