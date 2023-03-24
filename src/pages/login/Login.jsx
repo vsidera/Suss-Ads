@@ -3,11 +3,19 @@ import jwt from "jwt-decode";
 import { useState } from "react";
 import { loginAction } from "../../actions/login/loginAction";
 import { useNavigate } from "react-router-dom";
+import SnackbarAlert from "../../components/utils/snackbar";
 
 const Login = () => {
   const navigate = useNavigate();
   // Init cookies
   const cookies = new Cookies();
+
+  const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
+  const [eventType, setEventType] = useState('');
+  const [eventMessage, setEventMessage] = useState('');
+  const [eventTitle, setEventTitle] = useState('');
+  
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   // Init user state
   const [user, setUser] = useState(null);
@@ -19,9 +27,15 @@ const Login = () => {
     cookies.remove("jwt_authorization");
   };
 
+  const greenButton = {
+    backgroundColor: "green",
+    color: "white",
+  };
+
+
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("THIS GETS HERE!!!!!!!!");
+
     const formValues = {
       username: username,
       password: password,
@@ -29,12 +43,15 @@ const Login = () => {
     loginAction(formValues)
       .then((res) => {
         if (res.errors) {
-          // setIsError(true);
-          // setActionType('');
-          // setErrorMsg(res.errors._error);
+          setEventType('fail');
+          setEventMessage('Login Failed');
+          setEventTitle('LOGIN');
+          setIsSnackBarAlertOpen(true);
         } else {
-          // setSuccess(true);
-          // setActionType('');
+          setEventType('success');
+          setEventMessage('Logged In Successfully!');
+          setEventTitle('LOGIN');
+          setIsSnackBarAlertOpen(true);
           setTimeout(() => {
             navigate("/apps");
             // props.history.push('/sidebar');
@@ -76,6 +93,14 @@ const Login = () => {
 
 
   return (
+    <>
+     <SnackbarAlert
+        open={isSnackBarAlertOpen}
+        type={eventType}
+        message={eventMessage}
+        handleClose={() => setIsSnackBarAlertOpen(false)}
+        title={eventTitle}
+      />
     <section class="bg-gray-50 dark:bg-gray-900">
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -149,9 +174,18 @@ const Login = () => {
                 </a>
               </div>
               <button
-                onClick={handleLogin}
+
                 type="submit"
                 class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                style={{
+                  marginTop: "2rem",
+                  alignSelf: "center",
+                  ...(isButtonClicked ? greenButton : {}),
+                }}      
+                onClick={(e) => {
+                  handleLogin(e);
+                  setIsButtonClicked(true);
+                }}       
               >
                 Sign in
               </button>
@@ -169,6 +203,7 @@ const Login = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
