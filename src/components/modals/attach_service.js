@@ -9,7 +9,8 @@ import SnackbarAlert from "../utils/snackbar";
 const AttachServiceModal = ({
   attachServiceModal,
   closeAttachServiceModal,
-  app_id
+  app_id, 
+  appId
 }) => {
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
   const [eventType, setEventType] = useState('');

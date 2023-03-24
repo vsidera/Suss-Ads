@@ -148,7 +148,15 @@ const Contacts = () => {
     elevation: 0,
     selectableRowsHeader: true,
     selectableRows: "multiple",
-    onRowsSelect: handleRowSelection,
+    onRowsSelect : (curRowSelected, allRowsSelected,rowMeta) => {
+
+          console.log("---RowSelect",rowMeta)
+      
+          console.log("Row Selected: ", curRowSelected);
+      
+          console.log("All Selected: ", allRowsSelected);
+      
+        },
     rowsPerPageOptions: [10, 20, 50],
     columnWidths: ['20%', '20%', '20%', '20%', '20%'], 
     setTableProps: () => ({ 

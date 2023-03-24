@@ -76,8 +76,8 @@ const AttachUserModal = ({
     e.preventDefault();
 
     const data = {
-      user_id: selectedValue.value,
-      application_id: appId
+      user_id: (selectedValue.value).toString(),
+      application_id: (appId).toString()
     };
 
     console.log("DATA IS!!!!!!!!!!!",data)
