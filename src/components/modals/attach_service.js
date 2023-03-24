@@ -150,7 +150,7 @@ const AttachServiceModal = ({
                   />
 
                   <button
-                    className="bg-[#9B9DEE] text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
+                    className="bg-blue-800 text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
                     style={{ marginTop: "2rem", alignSelf: "center" }}
                     onClick={handleSubmit}
                   >

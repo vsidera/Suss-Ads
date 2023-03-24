@@ -16,6 +16,7 @@ const FileUpload = ({ closeUpload,app_id }) => {
   const [eventMessage, setEventMessage] = useState("");
   const [eventTitle, setEventTitle] = useState("");
 
+  
   const handleChange = (event) => {
     const file = event.target.files[0];
     const data = new FormData();
@@ -75,7 +76,7 @@ const FileUpload = ({ closeUpload,app_id }) => {
           <div className="cursor-pointer" onClick={closeUpload}>
             X
           </div>
-          <div className="mb-4 font-bold text-lg text-center">
+          <div className="mb-4 font-bold text-lg text-center font-serif text-blue-800">
             Pick a CSV file:
           </div>
           <div className="flex items-center justify-center mb-3">

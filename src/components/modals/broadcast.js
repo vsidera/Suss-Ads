@@ -3,21 +3,27 @@ import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
 import SnackbarAlert from "../utils/snackbar";
-import { broadcastMessages } from "../../actions/messages/messagesAction"
+import { broadcastMessages } from "../../actions/messages/messagesAction";
 
 const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
-
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
-  const [eventType, setEventType] = useState('');
-  const [eventMessage, setEventMessage] = useState('');
-  const [eventTitle, setEventTitle] = useState('');
+  const [eventType, setEventType] = useState("");
+  const [eventMessage, setEventMessage] = useState("");
+  const [eventTitle, setEventTitle] = useState("");
+
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const [state, setState] = React.useState({
-    requestid: '',
-    content: '',
-    scheduled: '',
-    destinations: []
-});
+    requestid: "",
+    content: "",
+    scheduled: "",
+    destinations: [],
+  });
+
+  const greenButton = {
+    backgroundColor: "green",
+    color: "white",
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -32,19 +38,19 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
 
     const newSms = {
       mobile_no: state.mobile_no,
-      message: state.message
+      message: state.message,
     };
 
     const res = broadcastMessages(newSms).then((res) => {
       if (res.status === 201) {
-        setEventType('success');
-        setEventMessage('Contact Successfully Created');
-        setEventTitle('CONTACT CREATE');
+        setEventType("success");
+        setEventMessage("Contact Successfully Created");
+        setEventTitle("CONTACT CREATE");
         setIsSnackBarAlertOpen(true);
       } else {
-        setEventType('fail');
-        setEventMessage('Contact NOT Created');
-        setEventTitle('CONTACT CREATE');
+        setEventType("fail");
+        setEventMessage("Contact NOT Created");
+        setEventTitle("CONTACT CREATE");
         setIsSnackBarAlertOpen(true);
       }
     });
@@ -72,7 +78,7 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
 
   return (
     <>
-    <SnackbarAlert
+      <SnackbarAlert
         open={isSnackBarAlertOpen}
         type={eventType}
         message={eventMessage}
@@ -121,10 +127,17 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
                   </div>
                   <button
                     className="bg-[#9B9DEE] text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
-                    style={{ marginTop: "2rem", alignSelf: "center" }}
-                    onClick={handleSubmit}
+                    style={{
+                      marginTop: "2rem",
+                      alignSelf: "center",
+                      ...(isButtonClicked ? greenButton : {}),
+                    }}
+                    onClick={(e) => {
+                      handleSubmit(e);
+                      setIsButtonClicked(true);
+                    }}
                   >
-                    SUBMIT
+                    {isButtonClicked ? "SUBMITTED" : "SUBMIT"}
                   </button>
                 </div>
               </div>

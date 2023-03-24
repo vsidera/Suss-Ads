@@ -25,7 +25,7 @@ export default function Sidebar({children}) {
             <div
                 className={` ${
                     open ? "w-40" : "w-60 "
-                } flex flex-col h-screen p-3 bg-gray-800 shadow duration-300`}
+                } flex flex-col h-screen p-3 bg-gray-800 shadow-2xl duration-300`}
             >
                 <div className="space-y-3">
                     <div className="flex items-center justify-between">

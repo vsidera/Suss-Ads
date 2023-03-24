@@ -12,97 +12,9 @@ import BroadcastModal from "../../components/modals/broadcast";
 import SendIcon from '@mui/icons-material/Send';
 
 const getMuiTheme = () =>
-  createTheme({
-    components: {
-      MuiTableCell: {
-        styleOverrides: {
-          root: {
-            backgroundColor: "#FFFFFF",
-            fontFamily: "Ubuntu",
-            fontWeight: "inherit",
-          },
-          footer: {
-            border: 0,
-          },
-        },
-      },
-      //@ts-ignoreimport {useParams} from 'react-router-dom';
-      MUIDataTableBodyCell: {
-        styleOverrides: {
-          root: {
-            textAlign: "center",
-            alignItems: "center",
-          },
-        },
-      },
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            // fontFamily: 'Ubuntu',
-            color: "#ffffff",
-            justifyContent: "start",
-            // fontWeight: 'bold',
-          },
-        },
-      },
-      MuiToolbar: {
-        styleOverrides: {
-          regular: {
-            ["@media (min-width:600px)"]: {
-              // eslint-disable-line no-useless-computed-key
-              paddingLeft: "0px",
-              paddingRight: "0px",
-              // minHeight:'3px',
-              marginBottom: "2px",
-              marginTop: "0px",
-            },
-          },
-        },
-      },
-
-      //@ts-ignore
-      MUIDataTableSelectCell: {
-        styleOverrides: {
-          headerCell: {
-            backgroundColor: "#5f6062",
-            color: "wh",
-          },
-        },
-      },
-
-      MUIDataTable: {
-        styleOverrides: {
-          responsiveBase: {
-            position: "relative",
-            height: "auto",
-            borderRadius: "18px",
-            border: "1px solid #f2f2f2",
-            boxShadow: "0 0 6px 4px #efefef",
-          },
-        },
-      },
-      MUIDataTablePagination: {
-        styleOverrides: {
-          navContainer: {
-            border: 0,
-            boxShadow: "0 ",
-          },
-        },
-      },
-      MuiCardHeader: {
-        styleOverrides: {
-          title: {
-            fontFamily: "Ubuntu",
-            display: "flex",
-          },
-          avatar: {
-            paddingLeft: 26,
-            fontFamily: "Ubuntu",
-          },
-        },
-      },
-    },
-  });
+  createTheme(
+  
+  );
 
 const Contacts = () => {
   const params = useParams();
@@ -114,20 +26,19 @@ const Contacts = () => {
   const [createModal, setCreateModal] = useState(false);
   const [upload, setUpload] = useState(false);
   const [broadcastModal, setBroadcastModal] = useState(false)
-  const [selectedMobileNos, setSelectedMobileNos] = useState([]);
 
-  const handleRowSelection = (currentRowsSelected, allRowsSelected) => {
-    console.log("LOG THE ROWS SELECTED!!!!!!!", allRowsSelected)
-    // const mobileNos = allRowsSelected.map((rowIndex) => {
-    //  
-    //   const rowData = contacts[rowIndex].mobile_no;
-    //   const mobileNo = rowData[2]; // assuming mobile_no is the third column
-    //   return mobileNo;
-    // });
-    // setSelectedMobileNos(mobileNos);
-  };
+  const [selectedRows, setSelectedRows] = useState([]);
 
-  console.log("LOG THE ROWS SELECTED!!!!!!!", selectedMobileNos)
+  const handleRowSelection = (currentRowsSelected, allRowsSelected, rowsSelected) => {
+    const selectedRowsIds = rowsSelected.map(row => allRowsSelected[row.index]?.data[3]);
+    console.log("THE SELECTED ROWS ARE !!!!!!!!", selectedRowsIds)
+  }
+
+  const handleBroadcast =() =>{
+    console.log("BROADCASTS")
+  }
+
+ 
 
   const getContacts = () => {
     console.log("THIS GETS HERE!!!!!!!!");
@@ -329,10 +240,10 @@ const Contacts = () => {
         <button
           type="button"
           className="text-white w-42 bg-gray-800 focus:ring-4 focus:outline-none font-light text-thin rounded-lg text-md px-2 py-2 mt-4 flex items-center ml-2"
-          onClick={() =>setBroadcastModal(true)}
+          onClick={handleBroadcast}
         >
           <SendIcon />
-          <p className="ml-4">Broadcast</p>
+          <p className="ml-4" >Broadcast</p>
         </button>
       </div>
       {upload ? <div>
