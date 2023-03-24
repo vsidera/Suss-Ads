@@ -14,9 +14,9 @@ export default {
     CREATE_SERVICE: `${REACT_APP_SUSS_URL}/api/v1/service/create`,
     CREATE_APP: `${REACT_APP_SUSS_URL}/api/v1/application/create`,
     SEND_SMS: `${REACT_APP_SUSS_URL}api/v1/message/2/user/send`,
-    LIST_APPLICATIONS: `${REACT_APP_SUSS_URL}api/v1/application/3/list?page=1&limit=20`,
-    LIST_SERVICES: `${REACT_APP_SUSS_URL}/api/v1/service/3/list?page=1&limit=20`,
-    USER_APPS: `${REACT_APP_SUSS_URL}/api/v1/users/application/list?page=1&limit=20`,
+    LIST_APPLICATIONS: `${REACT_APP_SUSS_URL}api/v1/application/3/list`,
+    LIST_SERVICES: `${REACT_APP_SUSS_URL}/api/v1/service/3/list`,
+    USER_APPS: `${REACT_APP_SUSS_URL}/api/v1/users/application/list`,
     USER_SEARCH: `${REACT_APP_SUSS_URL}api/v1/application`,
     SERVICE_SEARCH: `${REACT_APP_SUSS_URL}api/v1/service`
 };

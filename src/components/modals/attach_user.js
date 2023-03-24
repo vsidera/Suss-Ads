@@ -10,18 +10,18 @@ const AttachUserModal = ({
   attachUserModal,
   closeAttachUserModal,
   app_id,
-  appId
+  appId,
 }) => {
-
-  console.log("THE APPLICATION ID IS!!!!!!!!", appId)
+  console.log("THE APPLICATION ID IS!!!!!!!!", appId);
 
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
-  const [eventType, setEventType] = useState('');
-  const [eventMessage, setEventMessage] = useState('');
-  const [eventTitle, setEventTitle] = useState('');
-  
+  const [eventType, setEventType] = useState("");
+  const [eventMessage, setEventMessage] = useState("");
+  const [eventTitle, setEventTitle] = useState("");
 
-  const [search, setSearch] = useState(null)
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+
+  const [search, setSearch] = useState(null);
 
   const [selectedValue, setSelectedValue] = useState(null);
 
@@ -36,7 +36,7 @@ const AttachUserModal = ({
             value: user.id,
             label: user.email,
           }));
-  
+
           if (options.length === 0) {
             callback([], new Error("No results found"));
           } else if (options.length === 1) {
@@ -54,9 +54,7 @@ const AttachUserModal = ({
         callback([], new Error("An error occurred"));
       });
   };
-  
-  
-  
+
   const handleInputChange = (newValue) => {
     setSearch(newValue);
   };
@@ -66,37 +64,41 @@ const AttachUserModal = ({
   };
 
   useEffect(() => {
-  if (search){
-    loadOptions();
-  }
-    
+    if (search) {
+      loadOptions();
+    }
   }, [search]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const data = {
-      user_id: (selectedValue.value).toString(),
-      application_id: (appId).toString()
+      user_id: selectedValue.value.toString(),
+      application_id: appId.toString(),
     };
 
-    console.log("DATA IS!!!!!!!!!!!",data)
+    console.log("DATA IS!!!!!!!!!!!", data);
 
-    const res = userAttach({data, app_id}).then((res) => {
+    const res = userAttach({ data, app_id }).then((res) => {
       if (res.status === 201) {
-        setEventType('success');
-        setEventMessage('User Successfully Attached');
-        setEventTitle('USER ATTACH');
+        setEventType("success");
+        setEventMessage("User Successfully Attached");
+        setEventTitle("USER ATTACH");
         setIsSnackBarAlertOpen(true);
       } else {
-        setEventType('fail');
-        setEventMessage('User NOT Attached');
-        setEventTitle('USER ATTACH');
+        setEventType("fail");
+        setEventMessage("User NOT Attached");
+        setEventTitle("USER ATTACH");
         setIsSnackBarAlertOpen(true);
       }
     });
 
     return res;
+  };
+
+  const greenButton = {
+    backgroundColor: "green",
+    color: "white",
   };
 
   const style = {
@@ -124,7 +126,6 @@ const AttachUserModal = ({
     }),
   };
 
-
   return (
     <>
       <SnackbarAlert
@@ -143,7 +144,9 @@ const AttachUserModal = ({
           <Box sx={style}>
             <CardContent style={{ width: "60%" }}>
               <div className="text-center content-center w-full">
-                <p className="text-xl content-center items center">ATTACH USER</p>
+                <p className="text-xl content-center items center">
+                  ATTACH USER
+                </p>
 
                 <br />
 
@@ -161,10 +164,17 @@ const AttachUserModal = ({
 
                   <button
                     className="bg-blue-900 text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
-                    style={{ marginTop: "2rem", alignSelf: "center" }}
-                    onClick={handleSubmit}
+                    style={{
+                      marginTop: "2rem",
+                      alignSelf: "center",
+                      ...(isButtonClicked ? greenButton : {}),
+                    }}
+                    onClick={(e) => {
+                      handleSubmit(e);
+                      setIsButtonClicked(true);
+                    }}
                   >
-                    ATTACH USER
+                    {isButtonClicked ? "DONE!" : "ATTACH"}
                   </button>
                 </div>
               </div>

@@ -15,6 +15,7 @@ const RegisterUserModal = ({
     const [eventType, setEventType] = useState('');
     const [eventMessage, setEventMessage] = useState('');
     const [eventTitle, setEventTitle] = useState('');
+    const [isButtonClicked, setIsButtonClicked] = useState(false);
   
     const [state, setState] = React.useState({
       email: '',
@@ -57,6 +58,11 @@ const RegisterUserModal = ({
   
       return res;
     };
+
+    const greenButton = {
+      backgroundColor: "green",
+      color: "white",
+    };  
 
   const style = {
     position: "absolute",
@@ -149,12 +155,19 @@ const RegisterUserModal = ({
             </div>
 
             <button
-              className="bg-blue-900 text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
-              style={{ marginTop: "2rem", alignSelf: "center" }}
-              onClick={handleSubmit}
-            >
-              SUBMIT
-            </button>
+                    className="bg-blue-900 text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
+                    style={{
+                      marginTop: "2rem",
+                      alignSelf: "center",
+                      ...(isButtonClicked ? greenButton : {}),
+                    }}
+                    onClick={(e) => {
+                      handleSubmit(e);
+                      setIsButtonClicked(true);
+                    }}
+                  >
+                    {isButtonClicked ? "DONE!" : "REGISTER"}
+                  </button>
           </div>
         </div>
       </CardContent>

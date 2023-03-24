@@ -11,6 +11,8 @@ const FileUpload = ({ closeUpload,app_id }) => {
   const tokenKey = JSON.parse(localStorage.getItem('key'));
   const authToken = `Token ${tokenKey}`;
 
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
   const [eventType, setEventType] = useState("");
   const [eventMessage, setEventMessage] = useState("");
@@ -24,7 +26,10 @@ const FileUpload = ({ closeUpload,app_id }) => {
     setSelectedFile(data);
   };
 
-  const data = {"contacts": selectedFile}
+  const greenButton = {
+    backgroundColor: "green",
+    color: "white",
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -94,12 +99,19 @@ const FileUpload = ({ closeUpload,app_id }) => {
             </label>
           </div>
           <button
-            className="bg-blue-900 text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
-            style={{ marginTop: "2rem", alignSelf: "center" }}
-            onClick={handleSubmit}
-          >
-            UPLOAD
-          </button>
+                    className="bg-blue-900 text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
+                    style={{
+                      marginTop: "2rem",
+                      alignSelf: "center",
+                      ...(isButtonClicked ? greenButton : {}),
+                    }}
+                    onClick={(e) => {
+                      handleSubmit(e);
+                      setIsButtonClicked(true);
+                    }}
+                  >
+                    {isButtonClicked ? "DONE!" : "UPLOAD"}
+                  </button>
         </form>
       </div>
     </>

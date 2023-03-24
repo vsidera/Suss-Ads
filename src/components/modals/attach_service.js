@@ -3,22 +3,25 @@ import { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
 import AsyncSelect from "react-select/async";
-import { serviceAttach, serviceSearch } from "../../actions/services/servicesAction";
+import {
+  serviceAttach,
+  serviceSearch,
+} from "../../actions/services/servicesAction";
 import SnackbarAlert from "../utils/snackbar";
 
 const AttachServiceModal = ({
   attachServiceModal,
   closeAttachServiceModal,
-  app_id, 
-  appId
+  app_id,
+  appId,
 }) => {
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
-  const [eventType, setEventType] = useState('');
-  const [eventMessage, setEventMessage] = useState('');
-  const [eventTitle, setEventTitle] = useState('');
-  
+  const [eventType, setEventType] = useState("");
+  const [eventMessage, setEventMessage] = useState("");
+  const [eventTitle, setEventTitle] = useState("");
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
-  const [search, setSearch] = useState(null)
+  const [search, setSearch] = useState(null);
 
   const [selectedValue, setSelectedValue] = useState(null);
 
@@ -33,7 +36,7 @@ const AttachServiceModal = ({
             value: service.ID,
             label: service.sender,
           }));
-  
+
           if (options.length === 0) {
             callback([], new Error("No results found"));
           } else if (options.length === 1) {
@@ -51,8 +54,7 @@ const AttachServiceModal = ({
         callback([], new Error("An error occurred"));
       });
   };
-  
-  
+
   const handleInputChange = (newValue) => {
     setSearch(newValue);
   };
@@ -62,33 +64,38 @@ const AttachServiceModal = ({
   };
 
   useEffect(() => {
-  if (search){
-    loadOptions();
-  }
-    
+    if (search) {
+      loadOptions();
+    }
   }, [search]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const service_id = selectedValue.value
+    const service_id = selectedValue.value;
 
-    const res = serviceAttach({service_id,app_id}).then((res) => {
+    const res = serviceAttach({ service_id, app_id }).then((res) => {
       if (res.status === 200) {
-        setEventType('success');
-        setEventMessage('Service Successfully Attached');
-        setEventTitle('SERVICE ATTACH');
+        setEventType("success");
+        setEventMessage("Service Successfully Attached");
+        setEventTitle("SERVICE ATTACH");
         setIsSnackBarAlertOpen(true);
       } else {
-        setEventType('fail');
-        setEventMessage('Service NOT Attached');
-        setEventTitle('SERVICE ATTACH');
+        setEventType("fail");
+        setEventMessage("Service NOT Attached");
+        setEventTitle("SERVICE ATTACH");
         setIsSnackBarAlertOpen(true);
       }
     });
 
     return res;
   };
+
+  const greenButton = {
+    backgroundColor: "green",
+    color: "white",
+  };
+
   const style = {
     position: "absolute",
     top: "40%",
@@ -113,11 +120,10 @@ const AttachServiceModal = ({
       width: "100%",
     }),
   };
-  
 
   return (
     <>
-    <SnackbarAlert
+      <SnackbarAlert
         open={isSnackBarAlertOpen}
         type={eventType}
         message={eventMessage}
@@ -133,7 +139,9 @@ const AttachServiceModal = ({
           <Box sx={style}>
             <CardContent style={{ width: "60%" }}>
               <div className="text-center content-center w-full">
-                <p className="text-xl content-center items center">ATTACH SERVICE</p>
+                <p className="text-xl content-center items center">
+                  ATTACH SERVICE
+                </p>
 
                 <br />
 
@@ -151,10 +159,17 @@ const AttachServiceModal = ({
 
                   <button
                     className="bg-blue-900 text-white font-normal py-1.5 px-5 rounded text-[14px] w-full"
-                    style={{ marginTop: "2rem", alignSelf: "center" }}
-                    onClick={handleSubmit}
+                    style={{
+                      marginTop: "2rem",
+                      alignSelf: "center",
+                      ...(isButtonClicked ? greenButton : {}),
+                    }}
+                    onClick={(e) => {
+                      handleSubmit(e);
+                      setIsButtonClicked(true);
+                    }}
                   >
-                    ATTACH
+                    {isButtonClicked ? "DONE!" : "ATTACH"}
                   </button>
                 </div>
               </div>
