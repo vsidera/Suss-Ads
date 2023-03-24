@@ -90,6 +90,7 @@ const Contacts = () => {
   }
 
   const handleBroadcast =() =>{
+    setBroadcastModal(true)
     console.log("BROADCASTS")
   }
 

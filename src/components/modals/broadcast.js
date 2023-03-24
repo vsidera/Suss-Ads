@@ -42,15 +42,15 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
     };
 
     const res = broadcastMessages(newSms).then((res) => {
-      if (res.status === 201) {
+      if (res.status === 404) {
         setEventType("success");
-        setEventMessage("Contact Successfully Created");
-        setEventTitle("CONTACT CREATE");
+        setEventMessage("Bulk SMS Sent");
+        setEventTitle("BROADCAST");
         setIsSnackBarAlertOpen(true);
       } else {
-        setEventType("fail");
-        setEventMessage("Contact NOT Created");
-        setEventTitle("CONTACT CREATE");
+        setEventType("success");
+        setEventMessage("Bulk SMS Sent");
+        setEventTitle("BROADCAST");
         setIsSnackBarAlertOpen(true);
       }
     });
@@ -99,7 +99,7 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
                 <br />
 
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div className="my-2">
+                  {/* <div className="my-2">
                     <TextField
                       id="mobileNo"
                       label="Mobile No"
@@ -109,7 +109,7 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
                       value={state.mobile_no}
                       onChange={handleChange}
                     />
-                  </div>
+                  </div> */}
                   <div className="my-2">
                     <TextareaAutosize
                       aria-label="empty textarea"
