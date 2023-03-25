@@ -82,6 +82,11 @@ const Contacts = () => {
   const [upload, setUpload] = useState(false);
   const [broadcastModal, setBroadcastModal] = useState(false)
 
+  const [page, setPage] = useState(0);
+  const [limit, setLimit] = useState(10)
+
+  console.log("PAGE IS!!!!!!!!!!",page)
+
   const [selectedRows, setSelectedRows] = useState([]);
 
   const handleRowSelection = (currentRowsSelected, allRowsSelected, rowsSelected) => {
@@ -99,7 +104,7 @@ const Contacts = () => {
   const getContacts = () => {
     console.log("THIS GETS HERE!!!!!!!!");
 
-    contactsAction(app_id)
+    contactsAction({app_id,limit,page})
       .then((res) => {
         if (res.errors) {
           console.log("AN ERROR HAS OCCURED");
@@ -133,7 +138,7 @@ const Contacts = () => {
     getContacts();
     setIsLoaded(true)
 
-  }, [createModal]);
+  }, [createModal,page]);
 
   console.log("CONTACTS ARE......", contacts)
 
@@ -204,7 +209,24 @@ const Contacts = () => {
     count: 30,
     elevation: 0,
     selectableRowsHeader: true,
+    serverSide: true,
     selectableRows: "multiple",
+    onTableChange: (action, tableState) => {
+      console.log("ACTION IS !!!!", action);
+      if (action === "changePage") {
+
+        setIsLoaded(false);
+        setPage(tableState.page+1);
+
+      } else if (action === "changeRowsPerPage") {
+        console.log("action not handled.", tableState);
+        setIsLoaded(false);
+        setLimit(tableState.rowsPerPage);
+      }
+      else {
+        console.log("action not handled.");
+      }
+    },
     onRowsSelect : (curRowSelected, allRowsSelected,rowMeta) => {
 
           console.log("---RowSelect",rowMeta)

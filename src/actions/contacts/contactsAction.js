@@ -2,8 +2,9 @@ import axios from 'axios';
 import apiUrl from "../../utils/apiUtils/apiUrl";
 import { authHeaders } from '../../utils/headers/headers';
 
-export function contactsAction(app_id) {
-    const contactsUrl = `${apiUrl.LIST_CONTACTS}/${app_id}/list`;
+export function contactsAction(formValues) {
+    console.log("FORMVALUES ARE!!!!!!!88!!!!!!",formValues)
+    const contactsUrl = `${apiUrl.LIST_CONTACTS}/${formValues.app_id}/list?page=${formValues.page}&limit=${formValues.limit}`;
     const config = authHeaders();
   
     return axios
@@ -35,7 +36,7 @@ export function contactsAction(app_id) {
   }
 
 export function contactCreate(formValues) {
-    console.log("FORMVALUES ARE!!!!!!!!!!!!!",formValues)
+    
     const contactCreateUrl = `${apiUrl.CREATE_CONTACT}/${formValues.app_id}/create`;
     const config = authHeaders();
   

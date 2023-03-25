@@ -69,6 +69,10 @@ const getMuiTheme = () =>
 const AllServices = () => {
   const [services, setServices] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [page, setPage] = useState(0);
+  const [limit, setLimit] = useState(10)
+
+  console.log("PAGE IS!!!!!!!!!!",page)
 
   const [createServiceModal, setCreateServiceModal] = useState(false);
 
@@ -78,7 +82,7 @@ const AllServices = () => {
   }
 
   const getServices = () => {
-    servicesAction()
+    servicesAction({page,limit})
       .then((res) => {
         if (res.errors) {
           console.log("AN ERROR HAS OCCURED");
@@ -94,7 +98,7 @@ const AllServices = () => {
 
   useEffect(() => {
     getServices();
-  }, [createServiceModal]);
+  }, [createServiceModal,page]);
 
   const columns = [
     {
@@ -150,6 +154,7 @@ const AllServices = () => {
     enableNestedDataAccess: '.',
     elevation: 0,
     serverSide: true,
+    page: page,
     count: 30,
     rowsPerPageOptions: [10, 20, 50],
     downloadOptions: {
@@ -159,6 +164,22 @@ const AllServices = () => {
         useDisplayedColumnsOnly: false, // it was true
         useDisplayedRowsOnly: false, // it was true
       },
+    },
+    onTableChange: (action, tableState) => {
+      console.log("ACTION IS !!!!", action);
+      if (action === "changePage") {
+
+        setIsLoaded(false);
+        setPage(tableState.page+1);
+
+      } else if (action === "changeRowsPerPage") {
+        console.log("action not handled.", tableState);
+        setIsLoaded(false);
+        setLimit(tableState.rowsPerPage);
+      }
+      else {
+        console.log("action not handled.");
+      }
     },
     downloadFile: true,
     onDownload: (buildHead, buildBody, columns, data) => {
