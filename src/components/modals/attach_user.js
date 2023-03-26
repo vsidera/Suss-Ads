@@ -12,7 +12,6 @@ const AttachUserModal = ({
   app_id,
   appId,
 }) => {
-  console.log("THE APPLICATION ID IS!!!!!!!!", appId);
 
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
   const [eventType, setEventType] = useState("");
@@ -76,8 +75,6 @@ const AttachUserModal = ({
       user_id: selectedValue.value.toString(),
       application_id: appId.toString(),
     };
-
-    console.log("DATA IS!!!!!!!!!!!", data);
 
     const res = userAttach({ data, app_id }).then((res) => {
       if (res.status === 201) {

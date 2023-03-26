@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./styles.css";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Table from "../../components/table/table"
@@ -112,8 +111,6 @@ const AllApps = () => {
     setAppId(code)
     setAttachUserModal(true)
   }
-
-  console.log("THE SET APP ID VALUE IS!!!!!!!!", appId)
 
 
   const getApps = () => {

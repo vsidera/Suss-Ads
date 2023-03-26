@@ -4,8 +4,6 @@ import { authHeaders } from '../../utils/headers/headers';
 
 export function loginAction(formValues) {
     const loginUrl = apiUrl.LOGIN_URL;
-
-    console.log("THE URL IS!!!!!",loginUrl)
   
     return axios
       .post(loginUrl, formValues)

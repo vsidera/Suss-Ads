@@ -30,8 +30,7 @@ const Applications = () => {
 
   return (
     <>
-     
-      <div className="flex justify-center h-screen bg-gray-100 shadow-2xl shadow-top rounded-lg mb-4 m-16">
+    {isLoaded ? <div className="flex justify-center h-screen bg-gray-100 shadow-2xl shadow-top rounded-lg mb-4 m-16">
   <div
     className="flex flex-col justify-center items-center mt-6 mx-auto"
     style={{ width: "60vw" }}
@@ -49,7 +48,12 @@ const Applications = () => {
       </Link>
     ))}
   </div>
-</div>
+</div> :
+<div>
+  <h1>LOADING...</h1>
+</div> }
+     
+      
 
 
     </>

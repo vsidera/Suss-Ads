@@ -85,14 +85,10 @@ const Contacts = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10)
 
-  console.log("PAGE IS!!!!!!!!!!",page)
-
-  const [selectedRows, setSelectedRows] = useState([]);
-
-  const handleRowSelection = (currentRowsSelected, allRowsSelected, rowsSelected) => {
-    const selectedRowsIds = rowsSelected.map(row => allRowsSelected[row.index]?.data[3]);
-    console.log("THE SELECTED ROWS ARE !!!!!!!!", selectedRowsIds)
-  }
+  // const handleRowSelection = (currentRowsSelected, allRowsSelected, rowsSelected) => {
+  //   const selectedRowsIds = rowsSelected.map(row => allRowsSelected[row.index]?.data[3]);
+  //   console.log("THE SELECTED ROWS ARE !!!!!!!!", selectedRowsIds)
+  // }
 
   const handleBroadcast =() =>{
     setBroadcastModal(true)
@@ -102,7 +98,6 @@ const Contacts = () => {
  
 
   const getContacts = () => {
-    console.log("THIS GETS HERE!!!!!!!!");
 
     contactsAction({app_id,limit,page})
       .then((res) => {
@@ -209,7 +204,6 @@ const Contacts = () => {
     count: 30,
     elevation: 0,
     selectableRowsHeader: true,
-    serverSide: true,
     selectableRows: "multiple",
     onTableChange: (action, tableState) => {
       console.log("ACTION IS !!!!", action);
