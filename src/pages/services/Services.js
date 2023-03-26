@@ -163,7 +163,7 @@ const AllServices = () => {
       },
     },
     onTableChange: (action, tableState) => {
-      console.log("ACTION IS !!!!", action);
+
       if (action === "changePage") {
 
         setIsLoaded(false);
