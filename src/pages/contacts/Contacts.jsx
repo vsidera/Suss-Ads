@@ -82,7 +82,7 @@ const Contacts = () => {
   const [upload, setUpload] = useState(false);
   const [broadcastModal, setBroadcastModal] = useState(false)
 
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10)
 
   console.log("PAGE IS!!!!!!!!!!",page)
@@ -138,7 +138,7 @@ const Contacts = () => {
     getContacts();
     setIsLoaded(true)
 
-  }, [createModal,page]);
+  }, [createModal,page,limit]);
 
   console.log("CONTACTS ARE......", contacts)
 

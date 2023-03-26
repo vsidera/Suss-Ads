@@ -72,8 +72,6 @@ const AllServices = () => {
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10)
 
-  console.log("PAGE IS!!!!!!!!!!",page)
-
   const [createServiceModal, setCreateServiceModal] = useState(false);
 
   const closeCreateServiceModal = (e) => {
@@ -98,7 +96,7 @@ const AllServices = () => {
 
   useEffect(() => {
     getServices();
-  }, [createServiceModal,page]);
+  }, [createServiceModal,page,limit]);
 
   const columns = [
     {

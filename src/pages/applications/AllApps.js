@@ -85,6 +85,9 @@ const AllApps = () => {
   const [attachUserModal, setAttachUserModal] = useState(false);
   const [appId, setAppId] = useState(null)
 
+  const [page, setPage] = useState(0);
+  const [limit, setLimit] = useState(10)
+
   const closeCreateAppModal = (e) => {
     e.preventDefault();
     setCreateAppModal(false)
@@ -114,7 +117,7 @@ const AllApps = () => {
 
 
   const getApps = () => {
-    appsAction()
+    appsAction({page,limit})
       .then((res) => {
         if (res.errors) {
           console.log("AN ERROR HAS OCCURED");
@@ -130,7 +133,7 @@ const AllApps = () => {
 
   useEffect(() => {
     getApps();
-  }, [createAppModal]);
+  }, [createAppModal,page,limit]);
 
   const columns = [
    
@@ -233,6 +236,22 @@ const AllApps = () => {
       },
     },
     downloadFile: true,
+    onTableChange: (action, tableState) => {
+      console.log("ACTION IS !!!!", action);
+      if (action === "changePage") {
+
+        setIsLoaded(false);
+        setPage(tableState.page+1);
+
+      } else if (action === "changeRowsPerPage") {
+        console.log("action not handled.", tableState);
+        setIsLoaded(false);
+        setLimit(tableState.rowsPerPage);
+      }
+      else {
+        console.log("action not handled.");
+      }
+    },
     onDownload: (buildHead, buildBody, columns, data) => {
       let val = `${buildHead(columns)}${buildBody(data)}`.replace(/[^\x00-\x7F]/g, "").toString().trim();
       return val;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./styles.css";
 
-import { appsAction } from "../../actions/applications/appsActions";
+import { userApps } from "../../actions/applications/appsActions";
 import AppsCard from "../../components/appsCard/appsCard";
 
 const Applications = () => {
@@ -10,7 +10,7 @@ const Applications = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const getApps = () => {
-    appsAction()
+    userApps()
       .then((res) => {
         if (res.errors) {
           console.log("AN ERROR HAS OCCURED");
