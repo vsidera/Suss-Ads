@@ -177,7 +177,7 @@ const AppServices = () => {
       },
       toolbar: {
         search: "Search A/C Number,Name or Payplans",
-        downloadCsv: "Download Loans Excel List",
+        downloadCsv: "Download Sender Ids Excel List",
         print: "Print customers",
         viewColumns: "View Columns",
         filterTable: "Filter Table",
@@ -203,8 +203,8 @@ const AppServices = () => {
 
   return (
     <Sidebar>
-      <h1 className="text-2xl text-black mb-6">App Services</h1>
-      <h4 className="text-md text-gray-800 font-serif">A list of Application Services</h4>
+      <h1 className="text-2xl text-black mb-6">Org Sender Ids</h1>
+      <h4 className="text-md text-gray-800 font-serif">A list of this Organisation's Sender Ids</h4>
 
       
       <div className="mt-4">

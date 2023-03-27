@@ -270,7 +270,7 @@ const AllApps = () => {
       },
       toolbar: {
         search: "Search A/C Number,Name or Payplans",
-        downloadCsv: "Download Loans Excel List",
+        downloadCsv: "Download Organisation Excel List",
         print: "Print customers",
         viewColumns: "View Columns",
         filterTable: "Filter Table",

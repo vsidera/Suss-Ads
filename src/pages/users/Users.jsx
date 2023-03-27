@@ -195,7 +195,7 @@ const Users = () => {
       },
       toolbar: {
         search: "Search A/C Number,Name or Payplans",
-        downloadCsv: "Download Loans Excel List",
+        downloadCsv: "Download User Excel List",
         print: "Print customers",
         viewColumns: "View Columns",
         filterTable: "Filter Table",

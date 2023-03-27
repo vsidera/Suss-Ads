@@ -74,7 +74,7 @@ export default function AdminSidebar({children}) {
                                     </svg>
                     
                          
-                                    <span className="text-white text-xl text-thin font-extralight">Apps</span>
+                                    <span className="text-white text-xl text-thin font-extralight">Organisations</span>
                  
                                 </a>
                             </li>
@@ -98,7 +98,7 @@ export default function AdminSidebar({children}) {
                                         />
                                     </svg>
                        
-                                    <span className="text-white text-xl text-thin font-extralight">Services</span>
+                                    <span className="text-white text-xl text-thin font-extralight">Sender Ids</span>
                                 </a>
                             </li>
                             <li className="rounded-sm">

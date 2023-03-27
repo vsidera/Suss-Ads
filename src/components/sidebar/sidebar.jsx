@@ -121,7 +121,7 @@ export default function Sidebar({children}) {
                                         />
                                     </svg>
                                     <span className="text-white text-xl text-thin font-extralight">
-                                        App Services
+                                        Org Sender Ids
                                     </span>
                                 </a>
                             </li>
