@@ -1,26 +1,24 @@
 import React from "react";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
-import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
+import { Box, CardContent, FormControl, InputLabel, MenuItem, Select, TextField, TextareaAutosize } from "@mui/material";
 import SnackbarAlert from "../utils/snackbar";
-import { sendSms } from "../../actions/messages/messagesAction"
-import { v4 as uuidv4 } from 'uuid';
-
+import { sendSms } from "../../actions/messages/messagesAction";
+import { v4 as uuidv4 } from "uuid";
 
 const SendSmsModal = ({ smsModal, closeSendModal }) => {
-
   const randomUuid = uuidv4();
 
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
-  const [eventType, setEventType] = useState('');
-  const [eventMessage, setEventMessage] = useState('');
-  const [eventTitle, setEventTitle] = useState('');
+  const [eventType, setEventType] = useState("");
+  const [eventMessage, setEventMessage] = useState("");
+  const [eventTitle, setEventTitle] = useState("");
   const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [selectedName, setSelectedName] = useState("");
 
   const [state, setState] = React.useState({
-    destination: '',
-    content: '',
-
+    destination: "",
+    content: "",
   });
 
   const handleChange = (e) => {
@@ -38,19 +36,19 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
       destination: state.destination,
       content: state.content,
       requestid: randomUuid,
-      "scheduled":"2023-03-22T06:31:05"
+      scheduled: "2023-03-22T06:31:05",
     };
 
     const res = sendSms(newSms).then((res) => {
       if (res.status === 201) {
-        setEventType('success');
-        setEventMessage('Message Sent Successfully');
-        setEventTitle('MESSAGE SEND');
+        setEventType("success");
+        setEventMessage("Message Sent Successfully");
+        setEventTitle("MESSAGE SEND");
         setIsSnackBarAlertOpen(true);
       } else {
-        setEventType('fail');
-        setEventMessage('FAILED to send message!');
-        setEventTitle('MESSAGE SEND');
+        setEventType("fail");
+        setEventMessage("FAILED to send message!");
+        setEventTitle("MESSAGE SEND");
         setIsSnackBarAlertOpen(true);
       }
     });
@@ -61,7 +59,7 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
   const greenButton = {
     backgroundColor: "green",
     color: "white",
-  };  
+  };
 
   const style = {
     position: "absolute",
@@ -83,7 +81,7 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
 
   return (
     <>
-    <SnackbarAlert
+      <SnackbarAlert
         open={isSnackBarAlertOpen}
         type={eventType}
         message={eventMessage}
@@ -105,6 +103,22 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
 
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <div className="my-2">
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel id="name-label">Sender Id</InputLabel>
+                    <Select
+                      labelId="name-label"
+                      id="name"
+                      value={selectedName}
+                      label="Name"
+                      onChange={(e) => setSelectedName(e.target.value)}
+                    >
+                      <MenuItem value={"James"}>James</MenuItem>
+                      <MenuItem value={"Peter"}>Peter</MenuItem>
+                      <MenuItem value={"John"}>John</MenuItem>
+                    </Select>
+                    </FormControl>
+                    </div>
+                    <div className="my-2">
                     <TextField
                       id="mobileNo"
                       name="destination"

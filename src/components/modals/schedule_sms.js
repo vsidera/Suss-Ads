@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
-import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
+import { Box, CardContent, FormControl, InputLabel, MenuItem, Select, TextField, TextareaAutosize } from "@mui/material";
 import SnackbarAlert from "../utils/snackbar";
 import { sendSms } from "../../actions/messages/messagesAction"
 import MaterialUIPickers from "../utils/timePicker";
@@ -16,6 +16,7 @@ const randomUuid = uuidv4();
   const [eventMessage, setEventMessage] = useState('');
   const [eventTitle, setEventTitle] = useState('');
   const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [selectedName, setSelectedName] = useState("");
 
   const [state, setState] = React.useState({
     mobile_no: '',
@@ -106,6 +107,22 @@ const randomUuid = uuidv4();
                 <br />
 
                 <div style={{ display: "flex", flexDirection: "column" }}>
+                <div className="my-2">
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel id="name-label">Name</InputLabel>
+                    <Select
+                      labelId="name-label"
+                      id="name"
+                      value={selectedName}
+                      label="Name"
+                      onChange={(e) => setSelectedName(e.target.value)}
+                    >
+                      <MenuItem value={"James"}>James</MenuItem>
+                      <MenuItem value={"Peter"}>Peter</MenuItem>
+                      <MenuItem value={"John"}>John</MenuItem>
+                    </Select>
+                    </FormControl>
+                    </div>
                   <div className="my-2">
                     <TextField
                       id="mobileNo"
