@@ -85,10 +85,6 @@ const Contacts = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10)
 
-  // const handleRowSelection = (currentRowsSelected, allRowsSelected, rowsSelected) => {
-  //   const selectedRowsIds = rowsSelected.map(row => allRowsSelected[row.index]?.data[3]);
-  //   console.log("THE SELECTED ROWS ARE !!!!!!!!", selectedRowsIds)
-  // }
 
   const handleBroadcast =() =>{
     setBroadcastModal(true)
