@@ -11,7 +11,7 @@ import SnackbarAlert from "../utils/snackbar";
 
 const AttachServiceModal = ({
   attachServiceModal,
-  closeAttachServiceModal,
+  closeAttachUserModal,
   app_id,
   appId,
 }) => {
@@ -74,7 +74,7 @@ const AttachServiceModal = ({
 
     const service_id = selectedValue.value;
 
-    const res = serviceAttach({ service_id, app_id }).then((res) => {
+    const res = serviceAttach({ service_id, appId }).then((res) => {
       if (res.status === 200) {
         setEventType("success");
         setEventMessage("Service Successfully Attached");
@@ -133,7 +133,7 @@ const AttachServiceModal = ({
       <Modal
         open={attachServiceModal}
         sx={{ border: "none", boxShadow: "none" }}
-        onClose={closeAttachServiceModal}
+        onClose={closeAttachUserModal}
       >
         <div>
           <Box sx={style}>

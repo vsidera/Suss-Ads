@@ -99,7 +99,7 @@ export function servicesAction(formValues) {
   }  
 
   export function serviceAttach(formValues) {
-    const attachUrl = `${apiUrl.SERVICE_ATTACH}/${formValues.app_id}/service/${formValues.service_id}`;
+    const attachUrl = `${apiUrl.SERVICE_ATTACH}/${formValues.appId}/service/${formValues.service_id}`;
     const config = authHeaders();
   
     return axios

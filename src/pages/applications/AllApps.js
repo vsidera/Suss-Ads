@@ -7,7 +7,6 @@ import AdminSidebar from "../../components/adminSidebar/adminSidebar";
 import CreateAppModal from "../../components/modals/create_app";
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import AddLinkIcon from '@mui/icons-material/AddLink';
 import AttachServiceModal from "../../components/modals/attach_service";
 import AttachUserModal from "../../components/modals/attach_user";
 import {useParams} from 'react-router-dom';
@@ -92,17 +91,21 @@ const AllApps = () => {
     setCreateAppModal(false)
   }
 
-  const closeAttachServiceModal = (e) => {
-    e.preventDefault();
-    setAttachServiceModal(false)
-  }
 
   const closeAttachUserModal = (e) => {
     e.preventDefault();
     setAttachUserModal(false)
+
   }
 
-  const handleClick = () => {
+  const closeAttachServiceModal = (e) => {
+    e.preventDefault();
+
+    setAttachServiceModal(false)
+  }
+
+  const handleClick2 = (code) => {
+    setAppId(code)
     setAttachServiceModal(true)
   }
 
@@ -182,8 +185,8 @@ const AllApps = () => {
        sort: false,
        customBodyRender: (tableMeta, dataIndex, rowIndex) => {
         return (
-          <button onClick={handleClick}>
-          <AddLinkIcon />
+          <button onClick={() => handleClick2(dataIndex.rowData[4])}>
+          <PersonAddIcon />
           </button>
         );
       }
@@ -297,7 +300,7 @@ const AllApps = () => {
   return (
     <AdminSidebar>
     <CreateAppModal createAppModal={createAppModal} closeCreateAppModal={closeCreateAppModal}/>
-    <AttachServiceModal attachServiceModal={attachServiceModal} closeAttachServiceModal={closeAttachServiceModal} app_id={app_id} appId={appId}/>
+    <AttachServiceModal attachServiceModal={attachServiceModal} closeAttachServiceModal={closeAttachUserModal} app_id={app_id} appId={appId}/>
     <AttachUserModal attachUserModal={attachUserModal} closeAttachUserModal={closeAttachUserModal} app_id={app_id} appId={appId}/>
     <h1 className="text-2xl text-black mb-6">All Organisations</h1>
     <h4 className="text-md text-gray-800 font-serif">A list of all the Organisations </h4>
