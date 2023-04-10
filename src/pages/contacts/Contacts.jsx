@@ -223,7 +223,7 @@ const Contacts = () => {
         console.log("action not handled.");
       }
     },
-    onRowsSelect : (curRowSelected, allRowsSelected,rowMeta) => {
+    onRowSelectionChange : (curRowSelected, allRowsSelected,rowMeta) => {
 
       setSelectedIndices(rowMeta)
       
