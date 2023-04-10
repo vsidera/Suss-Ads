@@ -13,7 +13,7 @@ export default {
     SERVICE_ATTACH: `${REACT_APP_SUSS_URL}api/v1/application`,
     CREATE_SERVICE: `${REACT_APP_SUSS_URL}/api/v1/service/create`,
     CREATE_APP: `${REACT_APP_SUSS_URL}/api/v1/application/create`,
-    SEND_SMS: `${REACT_APP_SUSS_URL}api/v1/message/2/user/send`,
+    SEND_SMS: `${REACT_APP_SUSS_URL}api/v1/message`,
     LIST_APPLICATIONS: `${REACT_APP_SUSS_URL}api/v1/application/3/list`,
     LIST_SERVICES: `${REACT_APP_SUSS_URL}/api/v1/service/3/list`,
     USER_APPS: `${REACT_APP_SUSS_URL}/api/v1/users/application/list`,

@@ -69,7 +69,7 @@ export function messagesAction(app_id) {
   }
 
   export function sendSms(formValues) {
-    const sendSms = apiUrl.SEND_SMS;
+    const sendSms = `${apiUrl.SEND_SMS}/${formValues.sid}/user/send`;
     const config = authHeaders();
   
     return axios

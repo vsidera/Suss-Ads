@@ -1,10 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import { Box, CardContent, FormControl, InputLabel, MenuItem, Select, TextField, TextareaAutosize } from "@mui/material";
 import SnackbarAlert from "../utils/snackbar";
 import { sendSms } from "../../actions/messages/messagesAction";
 import { v4 as uuidv4 } from "uuid";
+import {useParams} from 'react-router-dom';
+import { appservicesAction } from "../../actions/appservices/appservicesAction";
 
 const SendSmsModal = ({ smsModal, closeSendModal }) => {
   const randomUuid = uuidv4();
@@ -14,7 +16,37 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
   const [eventMessage, setEventMessage] = useState("");
   const [eventTitle, setEventTitle] = useState("");
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-  const [selectedName, setSelectedName] = useState("");
+  const [selectedId, setSelectedId] = useState("");
+
+  const params = useParams();
+
+  const app_id = params.id
+
+  const [appservices, setAppservices] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const getAppServices = () => {
+
+    appservicesAction(app_id)
+      .then((res) => {
+        if (res.errors) {
+          console.log("AN ERROR HAS OCCURED");
+        } else {
+          setAppservices(res.data);
+          setIsLoaded(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getAppServices();
+  }, []);
+
+  console.log("APP SERVICE ARES!!!!!!", appservices)
+
 
   const [state, setState] = React.useState({
     destination: "",
@@ -108,15 +140,16 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
                     <Select
                       labelId="name-label"
                       id="name"
-                      value={selectedName}
+                      value={selectedId}
                       label="Name"
-                      onChange={(e) => setSelectedName(e.target.value)}
+                      onChange={(e) => setSelectedId(e.target.value)}
                     >
-                      <MenuItem value={"James"}>James</MenuItem>
-                      <MenuItem value={"Peter"}>Peter</MenuItem>
-                      <MenuItem value={"John"}>John</MenuItem>
+                      {appservices.map((obj) => (
+                        <MenuItem key={obj.id} value={obj.sendername}>{obj.sendername}</MenuItem>
+                      ))}
                     </Select>
-                    </FormControl>
+                  </FormControl>
+
                     </div>
                     <div className="my-2">
                     <TextField
