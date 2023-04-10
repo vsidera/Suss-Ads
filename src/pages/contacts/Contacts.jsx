@@ -85,14 +85,17 @@ const Contacts = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10)
 
+  const [selectedIndices, setSelectedIndices] = useState([])
+  const [selectedPhoneNumbers, setSelectedPhoneNumbers] = useState([]);
+
 
   const handleBroadcast =() =>{
     setBroadcastModal(true)
     console.log("BROADCASTS")
   }
 
- 
-
+  console.log("SELECTED PHONES!!!!!!",selectedPhoneNumbers)
+  
   const getContacts = () => {
 
     contactsAction({app_id,limit,page})
@@ -124,14 +127,17 @@ const Contacts = () => {
     setUpload(false)
   }
 
+  useEffect(() => {
+    const phoneNumbers = selectedIndices.map((index) => contacts[index].mobile_no);
+    setSelectedPhoneNumbers(phoneNumbers);
+  }, [selectedIndices, contacts]);
+
 
   useEffect(() => {
     getContacts();
     setIsLoaded(true)
 
   }, [createModal,page,limit]);
-
-  console.log("CONTACTS ARE......", contacts)
 
   const columns = [
     {
@@ -219,13 +225,10 @@ const Contacts = () => {
     },
     onRowsSelect : (curRowSelected, allRowsSelected,rowMeta) => {
 
-          console.log("---RowSelect",rowMeta)
+      setSelectedIndices(rowMeta)
       
-          console.log("Row Selected: ", curRowSelected);
-      
-          console.log("All Selected: ", allRowsSelected);
-      
-        },
+      },
+    
     rowsPerPageOptions: [10, 20, 50],
     columnWidths: ['20%', '20%', '20%', '20%', '20%'], 
     setTableProps: () => ({ 
@@ -293,7 +296,7 @@ const Contacts = () => {
 
   return (
     <Sidebar>
-      <BroadcastModal broadcastModal={broadcastModal} closeBroadcastModal={closeBroadcastModal}/>
+      <BroadcastModal broadcastModal={broadcastModal} closeBroadcastModal={closeBroadcastModal} selectedPhoneNumbers={selectedPhoneNumbers}/>
       <CreateModal createModal={createModal} closeCreateModal={closeCreateModal} app_id={app_id}/>
       <h1 className="text-2xl text-black mb-6">Contacts</h1>
       <h4 className="text-md text-gray-800 font-serif">A list of contacts for the client</h4>

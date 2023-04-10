@@ -5,7 +5,7 @@ export default {
     LIST_CONTACTS: `${REACT_APP_SUSS_URL}/api/v1/contact`,
     CREATE_CONTACT: `${REACT_APP_SUSS_URL}/api/v1/contact`,
     CREATE_USER: `${REACT_APP_SUSS_URL}/api/v1/user/:app_id/registration`,
-    BROADCAST_MESSAGE: `${REACT_APP_SUSS_URL}/api/v1/message/:sid/broadcast/send`,
+    BROADCAST_MESSAGE: `${REACT_APP_SUSS_URL}api/v1/message`,
     UPLOAD_CONTACTS: `${REACT_APP_SUSS_URL}api/v1/contact`,
     LIST_MESSAGES: `${REACT_APP_SUSS_URL}/api/v1/message`,
     LIST_APP_SERVICES: `${REACT_APP_SUSS_URL}/api/v1/application`,

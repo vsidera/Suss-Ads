@@ -37,11 +37,11 @@ export function messagesAction(app_id) {
 
 
   export function broadcastMessages(formValues) {
-    const broadcastUrl = apiUrl.BROADCAST_MESSAGE;
+    const broadcastUrl = `${apiUrl.BROADCAST_MESSAGE}/${formValues.selectedId}/broadcast/send`;
     const config = authHeaders();
   
     return axios
-      .get(broadcastUrl, config, formValues)
+      .post(broadcastUrl, formValues.newSms, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {
@@ -69,11 +69,11 @@ export function messagesAction(app_id) {
   }
 
   export function sendSms(formValues) {
-    const sendSms = `${apiUrl.SEND_SMS}/${formValues.sid}/user/send`;
+    const sendSms = `${apiUrl.SEND_SMS}/${formValues.selectedId}/user/send`;
     const config = authHeaders();
   
     return axios
-      .post(sendSms, formValues, config)
+      .post(sendSms, formValues.newSms, config)
       .then((res) => {
       
         if (res.data && res.status === 200) {

@@ -71,7 +71,7 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
       scheduled: "2023-03-22T06:31:05",
     };
 
-    const res = sendSms(newSms).then((res) => {
+    const res = sendSms({selectedId,newSms}).then((res) => {
       if (res.status === 201) {
         setEventType("success");
         setEventMessage("Message Sent Successfully");

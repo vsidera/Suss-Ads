@@ -1,23 +1,33 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "@mui/material/Modal";
-import { Box, CardContent, TextField, TextareaAutosize } from "@mui/material";
+import { Box, CardContent, FormControl, InputLabel, MenuItem, Select, TextField, TextareaAutosize } from "@mui/material";
 import SnackbarAlert from "../utils/snackbar";
 import { broadcastMessages } from "../../actions/messages/messagesAction";
+import {useParams} from 'react-router-dom';
+import { appservicesAction } from "../../actions/appservices/appservicesAction";
+import { v4 as uuidv4 } from "uuid";
 
-const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
+const BroadcastModal = ({ broadcastModal, closeBroadcastModal, selectedPhoneNumbers }) => {
+  const randomUuid = uuidv4();
+
   const [isSnackBarAlertOpen, setIsSnackBarAlertOpen] = useState(false);
   const [eventType, setEventType] = useState("");
   const [eventMessage, setEventMessage] = useState("");
   const [eventTitle, setEventTitle] = useState("");
+  const [selectedId, setSelectedId] = useState("");
+
+  const params = useParams();
+
+  const app_id = params.id
 
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
+  const [appservices, setAppservices] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const [state, setState] = React.useState({
-    requestid: "",
     content: "",
-    scheduled: "",
-    destinations: [],
   });
 
   const greenButton = {
@@ -37,11 +47,14 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
     e.preventDefault();
 
     const newSms = {
-      mobile_no: state.mobile_no,
-      message: state.message,
+      requestid: randomUuid,
+      content: state.content,
+      scheduled: "2023-03-22T06:31:05",
+      destinations: selectedPhoneNumbers
+
     };
 
-    const res = broadcastMessages(newSms).then((res) => {
+    const res = broadcastMessages({selectedId,newSms}).then((res) => {
       if (res.status === 404) {
         setEventType("success");
         setEventMessage("Bulk SMS Sent");
@@ -57,6 +70,28 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
 
     return res;
   };
+
+  const getAppServices = () => {
+
+    appservicesAction(app_id)
+      .then((res) => {
+        if (res.errors) {
+          console.log("AN ERROR HAS OCCURED");
+        } else {
+          setAppservices(res.data);
+          setIsLoaded(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getAppServices();
+  }, []);
+
+  console.log("APP SERVICE ARES!!!!!!", appservices)
 
   const style = {
     position: "absolute",
@@ -99,22 +134,30 @@ const BroadcastModal = ({ broadcastModal, closeBroadcastModal }) => {
                 <br />
 
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  {/* <div className="my-2">
-                    <TextField
-                      id="mobileNo"
-                      label="Mobile No"
-                      variant="outlined"
-                      type="number"
-                      fullWidth
-                      value={state.mobile_no}
-                      onChange={handleChange}
-                    />
-                  </div> */}
+                <div className="my-2">
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel id="name-label">Sender Id</InputLabel>
+                    <Select
+                      labelId="name-label"
+                      id="name"
+                      value={selectedId}
+                      label="Name"
+                      onChange={(e) => setSelectedId(e.target.value)}
+                    >
+                      {appservices.map((obj) => (
+                        <MenuItem key={obj.id} value={obj.sendername}>{obj.sendername}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+
+                    </div>
                   <div className="my-2">
                     <TextareaAutosize
+                      name="content"
+                      id="content"
                       aria-label="empty textarea"
                       placeholder="Type your message here"
-                      value={state.message}
+                      value={state.content}
                       onChange={handleChange}
                       minRows={3}
                       style={{
