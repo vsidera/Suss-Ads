@@ -11,7 +11,7 @@ import SnackbarAlert from "../utils/snackbar";
 
 const AttachServiceModal = ({
   attachServiceModal,
-  closeAttachUserModal,
+  closeAttachServiceModal,
   app_id,
   appId,
 }) => {
@@ -133,7 +133,7 @@ const AttachServiceModal = ({
       <Modal
         open={attachServiceModal}
         sx={{ border: "none", boxShadow: "none" }}
-        onClose={closeAttachUserModal}
+        onClose={closeAttachServiceModal}
       >
         <div>
           <Box sx={style}>
