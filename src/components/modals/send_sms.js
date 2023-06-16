@@ -145,7 +145,7 @@ const SendSmsModal = ({ smsModal, closeSendModal }) => {
                       onChange={(e) => setSelectedId(e.target.value)}
                     >
                       {appservices.map((obj) => (
-                        <MenuItem key={obj.id} value={obj.sendername}>{obj.sendername}</MenuItem>
+                        <MenuItem key={obj.appid} value={obj.appid}>{obj.sendername}</MenuItem>
                       ))}
                     </Select>
                   </FormControl>
